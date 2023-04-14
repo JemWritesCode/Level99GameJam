@@ -18,6 +18,9 @@
 # Uncomment this line if you wish to ignore the asset store tools plugin
 /[Aa]ssets/AssetStoreTools*
 
+# Ignore anything in ImportedAssets
+/[Aa]ssets/[Ii]mported[Aa]ssets/
+
 # Ignore plugins from Asset store
 /[Aa]ssets/[Pp]lugins/Demigiant*
 
