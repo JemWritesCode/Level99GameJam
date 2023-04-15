@@ -30,6 +30,7 @@ public class MenuUIController : MonoBehaviour {
     MenuPanel.SetActive(toggleOn);
 
     Time.timeScale = toggleOn ? 0f : 1f;
+
     _depthOfFieldEffect.enabled.value = toggleOn;
 
     DOTween
@@ -39,6 +40,7 @@ public class MenuUIController : MonoBehaviour {
               toggleOn ? -100f : 0f,
               1f)
         .SetUpdate(true)
-        .OnStart(() => _colorGradingEffect.enabled.value = true);
+        .OnStart(() => _colorGradingEffect.enabled.value = true)
+        .OnComplete(() => _colorGradingEffect.enabled.value = toggleOn);
   }
 }
