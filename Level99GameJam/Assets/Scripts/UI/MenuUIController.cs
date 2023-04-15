@@ -3,9 +3,9 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
-public class MenuController : MonoBehaviour {
+public class MenuUIController : MonoBehaviour {
   [field: SerializeField, Header("UI")]
-  public GameObject MenuRoot { get; private set; }
+  public GameObject MenuPanel { get; private set; }
 
   [field: SerializeField, Header("Effects")]
   public PostProcessVolume EffectsVolume { get; private set; }
@@ -22,12 +22,12 @@ public class MenuController : MonoBehaviour {
 
   void Update() {
     if (Input.GetKeyDown(KeyCode.Tab)) {
-      ToggleMenu(!MenuRoot.activeSelf);
+      ToggleMenu(!MenuPanel.activeSelf);
     }
   }
 
   public void ToggleMenu(bool toggleOn) {
-    MenuRoot.SetActive(toggleOn);
+    MenuPanel.SetActive(toggleOn);
 
     Time.timeScale = toggleOn ? 0f : 1f;
     _depthOfFieldEffect.enabled.value = toggleOn;
@@ -38,6 +38,7 @@ public class MenuController : MonoBehaviour {
               x => _colorGradingEffect.saturation.value = x,
               toggleOn ? -100f : 0f,
               1f)
-        .SetUpdate(true);
+        .SetUpdate(true)
+        .OnStart(() => _colorGradingEffect.enabled.value = true);
   }
 }
