@@ -480,6 +480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36b806a63934d3d4192987bc89305188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <InventoryPanel>k__BackingField: {fileID: 1911050855}
 --- !u!1 &1631748918
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,6 +614,7 @@ GameObject:
   - component: {fileID: 1911050856}
   - component: {fileID: 1911050858}
   - component: {fileID: 1911050857}
+  - component: {fileID: 1911050859}
   m_Layer: 5
   m_Name: InventoryPanel
   m_TagString: Untagged
@@ -680,6 +682,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1911050855}
   m_CullTransparentMesh: 1
+--- !u!225 &1911050859
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911050855}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1928108543
 GameObject:
   m_ObjectHideFlags: 0

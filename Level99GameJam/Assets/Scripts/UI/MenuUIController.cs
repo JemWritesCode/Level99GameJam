@@ -21,7 +21,7 @@ public class MenuUIController : MonoBehaviour {
   }
 
   void Update() {
-    if (Input.GetKeyDown(KeyCode.Tab)) {
+    if (Input.GetKeyDown(KeyCode.Escape)) {
       ToggleMenu(!MenuPanel.activeSelf);
     }
   }
