@@ -6,6 +6,12 @@ public class InventoryUIController : MonoBehaviour {
   [field: SerializeField, Header("UI")]
   public CanvasGroup InventoryPanel { get; private set; }
 
+  [field: SerializeField, Header("ItemList")]
+  public RectTransform ItemListContent { get; private set; }
+
+  [field: SerializeField, Header("ItemSlot")]
+  public GameObject ItemSlotTemplate { get; private set; }
+
   Sequence _toggleInventoryPanelSequence;
 
   void Start() {
@@ -35,5 +41,10 @@ public class InventoryUIController : MonoBehaviour {
   public void ToggleInventoryPanel() {
     _toggleInventoryPanelSequence.Flip();
     _toggleInventoryPanelSequence.Play();
+  }
+
+  public void AddItem() {
+    GameObject itemSlot = Instantiate(ItemSlotTemplate, ItemListContent);
+    itemSlot.SetActive(true);
   }
 }
