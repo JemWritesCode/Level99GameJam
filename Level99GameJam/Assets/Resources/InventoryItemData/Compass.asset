@@ -15,3 +15,4 @@ MonoBehaviour:
   <ItemSprite>k__BackingField: {fileID: 21300000, guid: 7380cd877657cc249bdb3d6d2519d946, type: 3}
   <ItemName>k__BackingField: Compass
   <ItemDescription>k__BackingField: Always pointing to treasure!
+  <ItemCost>k__BackingField: 20

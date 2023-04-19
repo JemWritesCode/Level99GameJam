@@ -15,3 +15,4 @@ MonoBehaviour:
   <ItemSprite>k__BackingField: {fileID: 21300000, guid: 218229e1c3a7d7644b9af197a140aca4, type: 3}
   <ItemName>k__BackingField: Treasure Chest
   <ItemDescription>k__BackingField: This is a treasure chest it goes honk.
+  <ItemCost>k__BackingField: 500

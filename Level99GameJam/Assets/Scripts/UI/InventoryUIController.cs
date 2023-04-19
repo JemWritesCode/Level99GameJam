@@ -53,7 +53,11 @@ public class InventoryUIController : MonoBehaviour {
     _toggleInventoryPanelSequence.Complete(true);
 
     ItemInfoPanel.alpha = 0f;
-    AddItem();
+    BuySellPanel.alpha = 0f;
+
+    foreach (InventoryItemData itemData in ItemData) {
+      AddItem(itemData);
+    }
   }
 
   void Update() {
@@ -72,16 +76,21 @@ public class InventoryUIController : MonoBehaviour {
   }
 
   public void AddItem() {
+    InventoryItemData itemData = ItemData[Random.Range(0, ItemData.Length)];
+    AddItem(itemData);
+  }
+
+  public void AddItem(InventoryItemData itemData) {
     GameObject itemSlot = Instantiate(ItemSlotTemplate, ItemListContent);
     ItemSlotUIController itemSlotController = itemSlot.GetComponent<ItemSlotUIController>();
-
-    InventoryItemData itemData = ItemData[Random.Range(0, ItemData.Length)];
+    
     itemSlotController.ItemLabel.text = itemData.ItemName;
     itemSlotController.ItemImage.sprite = itemData.ItemSprite;
     itemSlotController.ItemButton.onClick.AddListener(
         () => {
           _selectedItemSlot = itemSlot;
-          SetItemInfoPanel(itemData.name, itemData.ItemDescription);
+          SetItemInfoPanel(itemData.ItemName, itemData.ItemDescription);
+          SetBuySellPanel(itemData.ItemCost);
         });
 
     itemSlot.SetActive(true);
@@ -100,5 +109,28 @@ public class InventoryUIController : MonoBehaviour {
   public void ClearItemInfoPanel() {
     ItemInfoPanel.DOKill();
     ItemInfoPanel.DOFade(0f, 0.25f);
+  }
+
+  [field: SerializeField, Header("BuySell")]
+  public CanvasGroup BuySellPanel { get; private set; }
+
+  [field: SerializeField]
+  public Button BuySellButton { get; private set; }
+
+  [field: SerializeField]
+  public TMPro.TMP_Text BuySellButtonLabel { get; private set; }
+
+  [field: SerializeField]
+  public TMPro.TMP_Text BuySellCostValue { get; private set; }
+
+  public void SetBuySellPanel(float costValue) {
+    DOTween.Sequence()
+        .InsertCallback(
+            0f,
+            () => {
+              BuySellPanel.blocksRaycasts = true;
+              BuySellCostValue.text = $"{costValue:F0}";
+            })
+        .Insert(0f, BuySellPanel.DOFade(1f, 0.25f));
   }
 }

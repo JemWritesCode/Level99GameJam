@@ -389,7 +389,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -10, y: 0}
-  m_SizeDelta: {x: 25, y: 25}
+  m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &376998699
 MonoBehaviour:
@@ -1460,6 +1460,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c6ce5d74e75561f44800a498248902f9, type: 2}
   - {fileID: 11400000, guid: 0270bbf356b29b749b8344509beac853, type: 2}
   - {fileID: 11400000, guid: b43b434d105d7cf48b863a32b66d2054, type: 2}
+  - {fileID: 11400000, guid: ba85f2f1fee285d4ba202b1e6251e30f, type: 2}
+  <BuySellPanel>k__BackingField: {fileID: 2041086982}
+  <BuySellButton>k__BackingField: {fileID: 1631748920}
+  <BuySellButtonLabel>k__BackingField: {fileID: 1928108545}
+  <BuySellCostValue>k__BackingField: {fileID: 2110320980}
 --- !u!1 &992549292
 GameObject:
   m_ObjectHideFlags: 0
@@ -2619,7 +2624,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Buy
+  m_text: Sell
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 21803672ded135f428319c0043f50a19, type: 2}
   m_sharedMaterial: {fileID: -8453602015040686600, guid: 21803672ded135f428319c0043f50a19, type: 2}
@@ -2826,6 +2831,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2041086981}
+  - component: {fileID: 2041086982}
   m_Layer: 5
   m_Name: BuySell
   m_TagString: Untagged
@@ -2855,6 +2861,18 @@ RectTransform:
   m_AnchoredPosition: {x: -30, y: 125}
   m_SizeDelta: {x: 200, y: 40}
   m_Pivot: {x: 1, y: 0.5}
+--- !u!225 &2041086982
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041086980}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &2041783686
 GameObject:
   m_ObjectHideFlags: 0
@@ -3026,7 +3044,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -40, y: 0}
+  m_SizeDelta: {x: -35, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &2110320980
 MonoBehaviour:

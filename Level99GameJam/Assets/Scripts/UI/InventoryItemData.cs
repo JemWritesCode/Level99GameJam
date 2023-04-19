@@ -10,4 +10,7 @@ public class InventoryItemData : ScriptableObject {
 
   [field: SerializeField]
   public string ItemDescription { get; private set; }
+
+  [field: SerializeField]
+  public float ItemCost { get; private set; }
 }
