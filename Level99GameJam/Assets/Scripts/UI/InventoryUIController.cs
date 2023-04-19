@@ -1,6 +1,7 @@
 using DG.Tweening;
 
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class InventoryUIController : MonoBehaviour {
@@ -25,7 +26,14 @@ public class InventoryUIController : MonoBehaviour {
   [field: SerializeField, Header("ItemData")]
   public InventoryItemData[] ItemData { get; private set; }
 
+  EventSystem _eventSystem;
+  GameObject _selectedItemSlot;
+
   Sequence _toggleInventoryPanelSequence;
+
+  void Awake() {
+    _eventSystem = EventSystem.current;
+  }
 
   void Start() {
     InventoryPanel.alpha = 0f;
@@ -52,6 +60,10 @@ public class InventoryUIController : MonoBehaviour {
     if (Input.GetKeyDown(KeyCode.Tab)) {
       ToggleInventoryPanel();
     }
+
+    if (_selectedItemSlot && _eventSystem.currentSelectedGameObject != _selectedItemSlot) {
+      _eventSystem.SetSelectedGameObject(_selectedItemSlot);
+    }
   }
 
   public void ToggleInventoryPanel() {
@@ -68,6 +80,7 @@ public class InventoryUIController : MonoBehaviour {
     itemSlotController.ItemImage.sprite = itemData.ItemSprite;
     itemSlotController.ItemButton.onClick.AddListener(
         () => {
+          _selectedItemSlot = itemSlot;
           SetItemInfoPanel(itemData.name, itemData.ItemDescription);
         });
 
