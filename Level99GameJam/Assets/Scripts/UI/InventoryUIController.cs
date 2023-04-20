@@ -55,11 +55,12 @@ public class InventoryUIController : MonoBehaviour {
     _toggleInventoryPanelSequence.Complete(true);
 
     ItemInfoPanel.alpha = 0f;
-    BuySellPanel.alpha = 0f;
 
     foreach (InventoryItemData itemData in ItemData) {
       AddItem(itemData);
     }
+
+    ResetBuySellPanel();
   }
 
   void Update() {
@@ -139,7 +140,6 @@ public class InventoryUIController : MonoBehaviour {
   public void ResetBuySellPanel() {
     BuySellPanel.alpha = 0f;
     BuySellPanel.blocksRaycasts = false;
-
     BuySellCostLabel.alpha = 0f;
 
     _currentCostValue = 0f;
@@ -150,28 +150,37 @@ public class InventoryUIController : MonoBehaviour {
 
     DOTween.Complete(BuySellPanel, withCallbacks: true);
 
-    DOTween.Sequence()
-        .SetTarget(BuySellPanel)
-        .SetLink(gameObject)
-        .Insert(0f, BuySellButtonLabel.DOFade(canBuySell ? 1f : 0.4f, 0.1f))
-        .Insert(0f, BuySellPanel.DOFade(1f, 0.10f))
-        .Insert(0f, BuySellCostValue.DOCounter((int) _currentCostValue, (int) costValue, 0.1f, false))
-        .Insert(0f, BuySellCostLabel.DOFade(canBuySell ? 0f : 1f, 0.1f))
-        .Insert(0f, BuySellCostLabel.transform.DOPunchPosition(new Vector3(0f, 5f, 0f), 0.1f))
-        .Insert(
-            0f,
-            DOTween.To(
-                () => BuySellButtonDisableEffect.effectFactor,
-                x => BuySellButtonDisableEffect.effectFactor = x,
-                canBuySell ? 0f : 1f,
-                0.10f))
-        .Insert(
-            0f,
-            DOTween.To(
-                () => BuySellCostDisableEffect.effectFactor,
-                x => BuySellCostDisableEffect.effectFactor = x,
-                canBuySell ? 0f : 1f,
-                0.10f));
+    Sequence sequence =
+        DOTween.Sequence()
+            .SetTarget(BuySellPanel)
+            .SetLink(gameObject)
+            .Insert(0f, BuySellPanel.DOFade(1f, 0.10f))
+            .Insert(0f, BuySellCostValue.DOCounter((int) _currentCostValue, (int) costValue, 0.1f, false))
+            .Insert(
+                0f,
+                DOTween.To(
+                    () => BuySellButtonDisableEffect.effectFactor,
+                    x => BuySellButtonDisableEffect.effectFactor = x,
+                    canBuySell ? 0f : 1f,
+                    0.10f))
+            .Insert(
+                0f,
+                DOTween.To(
+                    () => BuySellCostDisableEffect.effectFactor,
+                    x => BuySellCostDisableEffect.effectFactor = x,
+                    canBuySell ? 0f : 1f,
+                    0.10f));
+
+    if (canBuySell) {
+      sequence
+          .Insert(0f, BuySellCostLabel.DOFade(0f, 0.1f))
+          .Insert(0f, BuySellButtonLabel.DOFade(1f, 0.1f));
+    } else {
+      sequence
+          .Insert(0f, BuySellButtonLabel.DOFade(0.4f, 0.1f))
+          .Insert(0f, BuySellCostLabel.transform.DOPunchPosition(new Vector3(0f, 5f, 0f), 0.1f))
+          .Insert(0f, BuySellCostLabel.DOFade(1f, 0.1f));
+    }
 
     _currentCostValue = costValue;
   }
