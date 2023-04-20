@@ -21,15 +21,13 @@ public class MenuUIController : MonoBehaviour {
   }
 
   void Update() {
-    if (Input.GetKeyDown(KeyCode.Escape)) {
+    if (Input.GetKeyDown(KeyCode.F2)) {
       ToggleMenu(!MenuPanel.activeSelf);
     }
   }
 
   public void ToggleMenu(bool toggleOn) {
     MenuPanel.SetActive(toggleOn);
-
-    Time.timeScale = toggleOn ? 0f : 1f;
 
     _depthOfFieldEffect.enabled.value = toggleOn;
 

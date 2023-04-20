@@ -1,10 +1,7 @@
-using Coffee.UIEffects;
-
 using DG.Tweening;
 
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class InventoryUIController : MonoBehaviour {
   [field: SerializeField, Header("UI")]
@@ -20,6 +17,7 @@ public class InventoryUIController : MonoBehaviour {
   public InventoryItemData[] ItemData { get; private set; }
 
   [field: Header("Controllers")]
+
   [field: SerializeField]
   public ItemInfoUIController ItemInfoUI { get; private set; }
 
@@ -29,16 +27,21 @@ public class InventoryUIController : MonoBehaviour {
   [field: SerializeField]
   public TreasuryUIController TreasuryUI { get; private set; }
 
+  SUPERCharacter.SUPERCharacterAIO _superCharacterController;
+
   EventSystem _eventSystem;
   GameObject _selectedItemSlot;
 
+  bool _isVisible = false;
   Sequence _toggleInventoryPanelSequence;
 
-  void Awake() {
-    _eventSystem = EventSystem.current;
-  }
-
   void Start() {
+    GameObject player = GameObject.FindWithTag("Player");
+    _superCharacterController = player.GetComponent<SUPERCharacter.SUPERCharacterAIO>();
+    _eventSystem = EventSystem.current;
+
+    _isVisible = false;
+
     InventoryPanel.alpha = 0f;
     InventoryPanel.blocksRaycasts = false;
 
@@ -53,8 +56,6 @@ public class InventoryUIController : MonoBehaviour {
             .SetAutoKill(false)
             .Pause();
 
-    _toggleInventoryPanelSequence.Complete(true);
-
     foreach (InventoryItemData itemData in ItemData) {
       AddItem(itemData);
     }
@@ -66,7 +67,8 @@ public class InventoryUIController : MonoBehaviour {
 
   void Update() {
     if (Input.GetKeyDown(KeyCode.Tab)) {
-      ToggleInventoryPanel();
+      _isVisible = !_isVisible;
+      ToggleInventoryPanel(_isVisible);
     }
 
     if (_selectedItemSlot && _eventSystem.currentSelectedGameObject != _selectedItemSlot) {
@@ -74,9 +76,24 @@ public class InventoryUIController : MonoBehaviour {
     }
   }
 
-  public void ToggleInventoryPanel() {
-    _toggleInventoryPanelSequence.Flip();
-    _toggleInventoryPanelSequence.Play();
+  public void ToggleInventoryPanel(bool toggleOn) {
+    if (toggleOn) {
+      _toggleInventoryPanelSequence.PlayForward();
+      _superCharacterController.PausePlayer(SUPERCharacter.PauseModes.BlockInputOnly);
+
+      Cursor.lockState = CursorLockMode.Confined;
+      Cursor.visible = true;
+
+      Time.timeScale = 0f;
+    } else {
+      _toggleInventoryPanelSequence.PlayBackwards();
+      _superCharacterController.UnpausePlayer();
+
+      Cursor.lockState = CursorLockMode.Locked;
+      Cursor.visible = false;
+
+      Time.timeScale = 1f;
+    }
   }
 
   public void AddItem() {
