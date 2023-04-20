@@ -35,6 +35,8 @@ public class InventoryUIController : MonoBehaviour {
   bool _isVisible = false;
   Sequence _toggleInventoryPanelSequence;
 
+  float _playerCoinsValue = 0f;
+
   void Start() {
     GameObject player = GameObject.FindWithTag("Player");
     _superCharacterController = player.GetComponent<SUPERCharacter.SUPERCharacterAIO>();
@@ -112,8 +114,16 @@ public class InventoryUIController : MonoBehaviour {
           _selectedItemSlot = itemSlot;
           ItemInfoUI.SetPanel(itemData.ItemName, itemData.ItemDescription);
           BuySellUI.SetPanel((int) itemData.ItemCost, itemData.ItemCost < 500);
+
+          BuySellUI.BuySellButton.onClick.RemoveAllListeners();
+          BuySellUI.BuySellButton.onClick.AddListener(() => SellItem(itemData));
         });
 
     itemSlot.SetActive(true);
+  }
+
+  public void SellItem(InventoryItemData itemData) {
+    _playerCoinsValue += itemData.ItemCost;
+    TreasuryUI.SetCoinsValue(Mathf.RoundToInt(_playerCoinsValue));
   }
 }

@@ -1,3 +1,5 @@
+using DG.Tweening;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +16,15 @@ public class TreasuryUIController : MonoBehaviour {
   [field: SerializeField]
   public Image CoinsImage { get; private set; }
 
+  int _currentCoinsValue = 0;
+
   public void ResetPanel() {
+    _currentCoinsValue = 0;
     CoinsValue.text = "0";
+  }
+
+  public void SetCoinsValue(int coinsValue) {
+    CoinsValue.DOCounter(_currentCoinsValue, coinsValue, 0.25f, false);
+    _currentCoinsValue = coinsValue;
   }
 }
