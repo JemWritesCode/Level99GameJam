@@ -19,7 +19,7 @@ public class Swimming : MonoBehaviour
     {
         GameObject ocean = GameObject.Find("Ocean");
         OceanRenderer oceanRenderer = ocean.GetComponent<OceanRenderer>();
-        rigidBody = GetComponent<Rigidbody>();   
+        rigidBody = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
