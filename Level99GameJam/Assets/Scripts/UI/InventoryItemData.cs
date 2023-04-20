@@ -8,7 +8,7 @@ public class InventoryItemData : ScriptableObject {
   [field: SerializeField]
   public string ItemName { get; private set; }
 
-  [field: SerializeField]
+  [field: SerializeField, TextArea(minLines: 3, maxLines: 6)]
   public string ItemDescription { get; private set; }
 
   [field: SerializeField]
