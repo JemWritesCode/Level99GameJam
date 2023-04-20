@@ -1481,6 +1481,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0270bbf356b29b749b8344509beac853, type: 2}
   - {fileID: 11400000, guid: b43b434d105d7cf48b863a32b66d2054, type: 2}
   - {fileID: 11400000, guid: ba85f2f1fee285d4ba202b1e6251e30f, type: 2}
+  <Treasury>k__BackingField: {fileID: 1766531877}
   <BuySellPanel>k__BackingField: {fileID: 2041086982}
   <BuySellButton>k__BackingField: {fileID: 1631748920}
   <BuySellButtonLabel>k__BackingField: {fileID: 1928108545}
@@ -2072,6 +2073,8 @@ GameObject:
   - component: {fileID: 1766531873}
   - component: {fileID: 1766531875}
   - component: {fileID: 1766531874}
+  - component: {fileID: 1766531876}
+  - component: {fileID: 1766531877}
   m_Layer: 5
   m_Name: Treasury
   m_TagString: Untagged
@@ -2140,6 +2143,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1766531872}
   m_CullTransparentMesh: 1
+--- !u!225 &1766531876
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766531872}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!114 &1766531877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766531872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e616fd760284efa43b9bd78f259f9218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <TreasuryPanel>k__BackingField: {fileID: 1766531876}
+  <CoinsValue>k__BackingField: {fileID: 603756152}
+  <CoinsLabel>k__BackingField: {fileID: 992549294}
+  <CoinsImage>k__BackingField: {fileID: 220718089}
 --- !u!1 &1776178387
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,6 +28,9 @@ public class InventoryUIController : MonoBehaviour {
   [field: SerializeField, Header("ItemData")]
   public InventoryItemData[] ItemData { get; private set; }
 
+  [field: SerializeField, Header("Controllers")]
+  public TreasuryUIController Treasury { get; private set; }
+
   EventSystem _eventSystem;
   GameObject _selectedItemSlot;
 
@@ -60,6 +63,7 @@ public class InventoryUIController : MonoBehaviour {
       AddItem(itemData);
     }
 
+    Treasury.ResetPanel();
     ResetBuySellPanel();
   }
 
@@ -100,13 +104,18 @@ public class InventoryUIController : MonoBehaviour {
   }
 
   public void SetItemInfoPanel(string name, string description) {
+    DOTween.Complete(ItemInfoPanel, withCallbacks: true);
+
     DOTween.Sequence()
-        .Insert(0f, ItemInfoPanel.DOFade(0f, 0.10f))
-        .InsertCallback(0.10f, () => {
+        .SetTarget(ItemInfoPanel)
+        .Insert(0f, ItemInfoPanel.DOFade(0f, 0.15f))
+        .InsertCallback(0.15f, () => {
           ItemInfoItemName.text = name;
           ItemInfoItemDescription.text = description;
         })
-        .Insert(0.10f, ItemInfoPanel.DOFade(1f, 0.25f));
+        .Insert(0f, ItemInfoItemName.transform.DOPunchPosition(new(0f, 7.5f, 0f), 0.3f, 0, 0))
+        .Insert(0f, ItemInfoItemDescription.transform.DOPunchPosition(new(0f, 7.5f, 0f), 0.3f, 0, 0))
+        .Insert(0.15f, ItemInfoPanel.DOFade(1f, 0.15f));
   }
 
   public void ClearItemInfoPanel() {
