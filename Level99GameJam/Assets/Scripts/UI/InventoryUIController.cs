@@ -1,3 +1,5 @@
+using Coffee.UIEffects;
+
 using DG.Tweening;
 
 using UnityEngine;
@@ -90,7 +92,7 @@ public class InventoryUIController : MonoBehaviour {
         () => {
           _selectedItemSlot = itemSlot;
           SetItemInfoPanel(itemData.ItemName, itemData.ItemDescription);
-          SetBuySellPanel(itemData.ItemCost);
+          SetBuySellPanel(itemData.ItemCost, itemData.ItemCost < 500);
         });
 
     itemSlot.SetActive(true);
@@ -121,16 +123,56 @@ public class InventoryUIController : MonoBehaviour {
   public TMPro.TMP_Text BuySellButtonLabel { get; private set; }
 
   [field: SerializeField]
+  public UIEffect BuySellButtonDisableEffect { get; private set; }
+
+  [field: SerializeField]
+  public UIEffect BuySellCostDisableEffect { get; private set; }
+
+  [field: SerializeField]
   public TMPro.TMP_Text BuySellCostValue { get; private set; }
 
-  public void SetBuySellPanel(float costValue) {
+  [field: SerializeField]
+  public TMPro.TMP_Text BuySellCostLabel { get; private set; }
+
+  float _currentCostValue = 0f;
+
+  public void ResetBuySellPanel() {
+    BuySellPanel.alpha = 0f;
+    BuySellPanel.blocksRaycasts = false;
+
+    BuySellCostLabel.alpha = 0f;
+
+    _currentCostValue = 0f;
+  }
+
+  public void SetBuySellPanel(float costValue, bool canBuySell) {
+    BuySellPanel.blocksRaycasts = canBuySell;
+
+    DOTween.Complete(BuySellPanel, withCallbacks: true);
+
     DOTween.Sequence()
-        .InsertCallback(
+        .SetTarget(BuySellPanel)
+        .SetLink(gameObject)
+        .Insert(0f, BuySellButtonLabel.DOFade(canBuySell ? 1f : 0.4f, 0.1f))
+        .Insert(0f, BuySellPanel.DOFade(1f, 0.10f))
+        .Insert(0f, BuySellCostValue.DOCounter((int) _currentCostValue, (int) costValue, 0.1f, false))
+        .Insert(0f, BuySellCostLabel.DOFade(canBuySell ? 0f : 1f, 0.1f))
+        .Insert(0f, BuySellCostLabel.transform.DOPunchPosition(new Vector3(0f, 5f, 0f), 0.1f))
+        .Insert(
             0f,
-            () => {
-              BuySellPanel.blocksRaycasts = true;
-              BuySellCostValue.text = $"{costValue:F0}";
-            })
-        .Insert(0f, BuySellPanel.DOFade(1f, 0.25f));
+            DOTween.To(
+                () => BuySellButtonDisableEffect.effectFactor,
+                x => BuySellButtonDisableEffect.effectFactor = x,
+                canBuySell ? 0f : 1f,
+                0.10f))
+        .Insert(
+            0f,
+            DOTween.To(
+                () => BuySellCostDisableEffect.effectFactor,
+                x => BuySellCostDisableEffect.effectFactor = x,
+                canBuySell ? 0f : 1f,
+                0.10f));
+
+    _currentCostValue = costValue;
   }
 }
