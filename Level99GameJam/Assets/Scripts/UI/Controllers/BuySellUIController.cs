@@ -76,4 +76,16 @@ public class BuySellUIController : MonoBehaviour {
 
     _currentCostValue = costValue;
   }
+
+  public void HidePanel() {
+    BuySellPanel.blocksRaycasts = false;
+
+    DOTween.Complete(BuySellPanel, withCallbacks: true);
+
+    DOTween.Sequence()
+        .SetTarget(BuySellPanel)
+        .SetLink(gameObject)
+        .Insert(0f, BuySellPanel.transform.DOPunchPosition(new Vector3(0f, -5f, 0f), 0.3f, 0, 0f))
+        .Insert(0f, BuySellPanel.DOFade(0f, 0.15f));
+  }
 }
