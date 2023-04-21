@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using DG.Tweening;
 
 using UnityEngine;
@@ -13,8 +15,8 @@ public class InventoryUIController : MonoBehaviour {
   [field: SerializeField, Header("ItemSlot")]
   public GameObject ItemSlotTemplate { get; private set; }
 
-  [field: SerializeField, Header("ItemData")]
-  public InventoryItemData[] ItemData { get; private set; }
+  [field: SerializeField, Header("Inventory")]
+  public List<InventoryItemData> CurrentInventory { get; private set; } = new();
 
   [field: Header("Controllers")]
 
@@ -58,7 +60,7 @@ public class InventoryUIController : MonoBehaviour {
             .SetAutoKill(false)
             .Pause();
 
-    foreach (InventoryItemData itemData in ItemData) {
+    foreach (InventoryItemData itemData in CurrentInventory) {
       AddItem(itemData);
     }
 
@@ -99,7 +101,7 @@ public class InventoryUIController : MonoBehaviour {
   }
 
   public void AddItem() {
-    InventoryItemData itemData = ItemData[Random.Range(0, ItemData.Length)];
+    InventoryItemData itemData = CurrentInventory[Random.Range(0, CurrentInventory.Count)];
     AddItem(itemData);
   }
 

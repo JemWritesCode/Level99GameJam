@@ -1473,11 +1473,12 @@ MonoBehaviour:
   <InventoryPanel>k__BackingField: {fileID: 1911050859}
   <ItemListContent>k__BackingField: {fileID: 390298872}
   <ItemSlotTemplate>k__BackingField: {fileID: 2126802026}
-  <ItemData>k__BackingField:
+  <CurrentInventory>k__BackingField:
   - {fileID: 11400000, guid: c6ce5d74e75561f44800a498248902f9, type: 2}
-  - {fileID: 11400000, guid: 0270bbf356b29b749b8344509beac853, type: 2}
   - {fileID: 11400000, guid: b43b434d105d7cf48b863a32b66d2054, type: 2}
+  - {fileID: 11400000, guid: e0b750dcad424c146a511166f207314f, type: 2}
   - {fileID: 11400000, guid: ba85f2f1fee285d4ba202b1e6251e30f, type: 2}
+  - {fileID: 11400000, guid: 0270bbf356b29b749b8344509beac853, type: 2}
   <ItemInfoUI>k__BackingField: {fileID: 1819798804}
   <BuySellUI>k__BackingField: {fileID: 2041086983}
   <TreasuryUI>k__BackingField: {fileID: 1766531877}
@@ -1525,6 +1526,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0ffb33e0ed3a1940b824b1917af226a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <PlayerInventory>k__BackingField: []
+  <ShopInventory>k__BackingField: []
 --- !u!1 &992549292
 GameObject:
   m_ObjectHideFlags: 0

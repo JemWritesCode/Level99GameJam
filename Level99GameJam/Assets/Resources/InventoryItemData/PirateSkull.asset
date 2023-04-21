@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5340b7ac6530be4bb0f2a118ab1e25a, type: 3}
-  m_Name: Book
+  m_Name: PirateSkull
   m_EditorClassIdentifier: 
   <ItemType>k__BackingField: 1
-  <ItemCost>k__BackingField: 10
-  <ItemSprite>k__BackingField: {fileID: 21300000, guid: 8b440f9b56362fa439cf6777ae8e66b7, type: 3}
-  <ItemName>k__BackingField: Book
-  <ItemDescription>k__BackingField: A book... of honks.
+  <ItemCost>k__BackingField: 250
+  <ItemSprite>k__BackingField: {fileID: 21300000, guid: 43eecc39812da594091b9ccad786b8d2, type: 3}
+  <ItemName>k__BackingField: Pirate Skull
+  <ItemDescription>k__BackingField: But who put the gem in its eye?

@@ -1,16 +1,27 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ItemData", menuName = "Inventory/ItemData", order = 1)]
+[CreateAssetMenu(menuName = "Inventory/ItemData", order = 1)]
 public class InventoryItemData : ScriptableObject {
+  public enum InventoryItemType {
+    None,
+    Loot,
+    Upgrade
+  }
+
+  [field: SerializeField]
+  public InventoryItemType ItemType { get; private set; }
+
+  [field: SerializeField]
+  public float ItemCost { get; private set; }
+
+  [field: Header("UI")]
+
   [field: SerializeField]
   public Sprite ItemSprite { get; private set; }
 
   [field: SerializeField]
   public string ItemName { get; private set; }
 
-  [field: SerializeField, TextArea(minLines: 3, maxLines: 6)]
+  [field: SerializeField, TextArea()]
   public string ItemDescription { get; private set; }
-
-  [field: SerializeField]
-  public float ItemCost { get; private set; }
 }
