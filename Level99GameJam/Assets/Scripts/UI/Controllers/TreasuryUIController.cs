@@ -1,3 +1,5 @@
+using Coffee.UIEffects;
+
 using DG.Tweening;
 
 using UnityEngine;
@@ -16,6 +18,9 @@ public class TreasuryUIController : MonoBehaviour {
   [field: SerializeField]
   public Image CoinsImage { get; private set; }
 
+  [field: SerializeField, Header("Effect")]
+  public UIShiny CoinsShinyEffect { get; private set; }
+
   int _currentCoinsValue = 0;
 
   public void ResetPanel() {
@@ -25,6 +30,8 @@ public class TreasuryUIController : MonoBehaviour {
 
   public void SetCoinsValue(int coinsValue) {
     CoinsValue.DOCounter(_currentCoinsValue, coinsValue, 0.25f, false);
+    CoinsShinyEffect.Play();
+
     _currentCoinsValue = coinsValue;
   }
 }
