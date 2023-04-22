@@ -2,10 +2,14 @@ using DG.Tweening;
 
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.UI;
 
 public class MenuUIController : MonoBehaviour {
   [field: SerializeField, Header("UI")]
   public GameObject MenuPanel { get; private set; }
+
+  [field: SerializeField, Header("Buttons")]
+  public Button QuitButton { get; private set; }
 
   [field: SerializeField, Header("Effects")]
   public PostProcessVolume EffectsVolume { get; private set; }
@@ -18,14 +22,6 @@ public class MenuUIController : MonoBehaviour {
     _depthOfFieldEffect = EffectsVolume.profile.GetSetting<DepthOfField>();
 
     ToggleMenu(toggleOn: false);
-  }
-
-  const KeyCode ToggleMenuPanelKeyCode = KeyCode.F2;
-
-  void Update() {
-    if (Input.GetKeyDown(KeyCode.F2)) {
-      ToggleMenu(!MenuPanel.activeSelf);
-    }
   }
 
   public void ToggleMenu(bool toggleOn) {
@@ -52,7 +48,6 @@ public class MenuUIController : MonoBehaviour {
   }
 
   public void OnQuitButton() {
-    Debug.Log("Button is quit.");
 #if UNITY_EDITOR
     UnityEditor.EditorApplication.isPlaying = false;
 #else

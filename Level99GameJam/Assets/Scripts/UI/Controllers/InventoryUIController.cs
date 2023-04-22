@@ -49,8 +49,8 @@ public class InventoryUIController : MonoBehaviour {
   readonly List<GameObject> _shopItemSlots = new();
   GameObject _selectedItemSlot;
 
-  bool _isVisible = false;
-  bool _isShopVisible = false;
+  public bool IsVisible { get; private set; } = false;
+  public bool IsShopVisible { get; private set; } = false;
 
   Sequence _toggleInventoryPanelSequence;
 
@@ -61,8 +61,8 @@ public class InventoryUIController : MonoBehaviour {
   void Start() {
     _eventSystem = EventSystem.current;
 
-    _isVisible = false;
-    _isShopVisible = false;
+    IsVisible = false;
+    IsShopVisible = false;
 
     InventoryPanel.alpha = 0f;
     InventoryPanel.blocksRaycasts = false;
@@ -84,11 +84,7 @@ public class InventoryUIController : MonoBehaviour {
   }
 
   void Update() {
-    if (Input.GetKeyDown(KeyCode.Tab)) {
-      ToggleInventoryPanel(!_isVisible, Input.GetKey(KeyCode.LeftShift));
-    }
-
-    if (_isVisible && _selectedItemSlot && _eventSystem.currentSelectedGameObject != _selectedItemSlot) {
+    if (IsVisible && _selectedItemSlot && _eventSystem.currentSelectedGameObject != _selectedItemSlot) {
       _eventSystem.SetSelectedGameObject(_selectedItemSlot);
     }
   }
@@ -98,20 +94,20 @@ public class InventoryUIController : MonoBehaviour {
   }
 
   public void ToggleInventoryPanel(bool toggleOn, bool isShopping = false) {
-    _isVisible = toggleOn;
+    IsVisible = toggleOn;
 
     if (toggleOn) {
       SetInventoryPanelState();
       ToggleShopPanel(isShopping);
 
       _toggleInventoryPanelSequence.PlayForward();
-      InputManager.Instance.UnlockCursor();
 
+      InputManager.Instance.UnlockCursor();
       Time.timeScale = 0f;
     } else {
       _toggleInventoryPanelSequence.PlayBackwards();
-      InputManager.Instance.LockCursor();
 
+      InputManager.Instance.LockCursor();
       Time.timeScale = 1f;
     }
   }
@@ -143,7 +139,7 @@ public class InventoryUIController : MonoBehaviour {
   }
 
   void ToggleShopPanel(bool toggleOn) {
-    _isShopVisible = toggleOn;
+    IsShopVisible = toggleOn;
 
     ShopItemList.SetActive(toggleOn);
     TitleText.SetText(toggleOn ? "Shopping" : "Inventory");
@@ -175,7 +171,7 @@ public class InventoryUIController : MonoBehaviour {
 
     BuySellUI.BuySellButton.onClick.RemoveAllListeners();
 
-    if (_isShopVisible && itemData.ItemType == InventoryItemData.InventoryItemType.Loot) {
+    if (IsShopVisible && itemData.ItemType == InventoryItemData.InventoryItemType.Loot) {
       BuySellUI.BuySellButtonLabel.text = "Sell";
       BuySellUI.SetPanel((int) itemData.ItemCost, canBuySell: true);
       BuySellUI.BuySellButton.onClick.AddListener(() => SellPlayerItem(itemSlot, itemData));
