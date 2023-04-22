@@ -46,8 +46,7 @@ public class InventoryUIController : MonoBehaviour {
 
   EventSystem _eventSystem;
 
-  readonly List<GameObject> _playerItemSlots = new();
-  readonly List<GameObject> _shopItemSlots = new();
+  readonly List<GameObject> _itemSlots = new();
   GameObject _selectedItemSlot;
 
   bool _isVisible = false;
@@ -132,17 +131,11 @@ public class InventoryUIController : MonoBehaviour {
   }
 
   void SetInventoryPanelState() {
-    foreach (GameObject itemSlot in _playerItemSlots) {
+    foreach (GameObject itemSlot in _itemSlots) {
       Destroy(itemSlot);
     }
 
-    _playerItemSlots.Clear();
-
-    foreach (GameObject itemSlot in _shopItemSlots) {
-      Destroy(itemSlot);
-    }
-
-    _shopItemSlots.Clear();
+    _itemSlots.Clear();
 
     foreach (InventoryItemData itemData in InventoryManager.Instance.PlayerInventory) {
       AddPlayerItem(itemData);
@@ -176,7 +169,7 @@ public class InventoryUIController : MonoBehaviour {
 
     itemSlot.SetActive(true);
 
-    _playerItemSlots.Add(itemSlot);
+    _itemSlots.Add(itemSlot);
     return itemSlot;
   }
 
@@ -204,7 +197,6 @@ public class InventoryUIController : MonoBehaviour {
     InventoryManager.Instance.PlayerCurrentCoins += itemData.ItemCost;
     TreasuryUI.SetCoinsValue(Mathf.RoundToInt(InventoryManager.Instance.PlayerCurrentCoins));
 
-    _playerItemSlots.Remove(itemSlot);
     Destroy(itemSlot);
 
     ItemInfoUI.HidePanel();
@@ -222,7 +214,7 @@ public class InventoryUIController : MonoBehaviour {
 
     itemSlot.SetActive(true);
 
-    _shopItemSlots.Add(itemSlot);
+    _itemSlots.Add(itemSlot);
     return itemSlot;
   }
 
@@ -243,7 +235,6 @@ public class InventoryUIController : MonoBehaviour {
     InventoryManager.Instance.PlayerCurrentCoins -= itemData.ItemCost;
     TreasuryUI.SetCoinsValue(Mathf.RoundToInt(InventoryManager.Instance.PlayerCurrentCoins));
 
-    _shopItemSlots.Remove(itemSlot);
     Destroy(itemSlot);
 
     GameObject playerItemSlot = AddPlayerItem(itemData);
