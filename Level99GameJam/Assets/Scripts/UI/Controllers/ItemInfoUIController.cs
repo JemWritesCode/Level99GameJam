@@ -40,7 +40,7 @@ public class ItemInfoUIController : MonoBehaviour {
         .Insert(0.15f, ItemInfoPanel.DOFade(1f, 0.15f));
   }
 
-  public void ClearItemInfoPanel() {
+  public void HidePanel() {
     ItemInfoPanel.DOKill();
     ItemInfoPanel.DOFade(0f, 0.25f);
   }
