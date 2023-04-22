@@ -57,7 +57,7 @@ public class Swimming : MonoBehaviour
     public void isNotUnderwater()
     {
         Debug.Log("I'm NOT underwater");
-        underWaterSound.Stop();
+        underWaterSound.Pause();
         StopSwimMovement();
         isBelowWater = false;
         ResetVelocity();
