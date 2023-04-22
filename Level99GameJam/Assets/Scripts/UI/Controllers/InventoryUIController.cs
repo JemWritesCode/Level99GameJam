@@ -42,7 +42,6 @@ public class InventoryUIController : MonoBehaviour {
   [field: SerializeField]
   public TreasuryUIController TreasuryUI { get; private set; }
 
-  SUPERCharacter.SUPERCharacterAIO _superCharacterController;
 
   EventSystem _eventSystem;
 
@@ -60,8 +59,6 @@ public class InventoryUIController : MonoBehaviour {
   }
 
   void Start() {
-    GameObject player = GameObject.FindWithTag("Player");
-    _superCharacterController = player ? player.GetComponent<SUPERCharacter.SUPERCharacterAIO>() : default;
     _eventSystem = EventSystem.current;
 
     _isVisible = false;
@@ -91,7 +88,7 @@ public class InventoryUIController : MonoBehaviour {
       ToggleInventoryPanel(!_isVisible, Input.GetKey(KeyCode.LeftShift));
     }
 
-    if (_selectedItemSlot && _eventSystem.currentSelectedGameObject != _selectedItemSlot) {
+    if (_isVisible && _selectedItemSlot && _eventSystem.currentSelectedGameObject != _selectedItemSlot) {
       _eventSystem.SetSelectedGameObject(_selectedItemSlot);
     }
   }
@@ -108,24 +105,12 @@ public class InventoryUIController : MonoBehaviour {
       ToggleShopPanel(isShopping);
 
       _toggleInventoryPanelSequence.PlayForward();
-
-      if (_superCharacterController) {
-        _superCharacterController.PausePlayer(SUPERCharacter.PauseModes.BlockInputOnly);
-      }
-
-      Cursor.lockState = CursorLockMode.Confined;
-      Cursor.visible = true;
+      InputManager.Instance.UnlockCursor();
 
       Time.timeScale = 0f;
     } else {
       _toggleInventoryPanelSequence.PlayBackwards();
-
-      if (_superCharacterController) {
-        _superCharacterController.UnpausePlayer();
-      }
-
-      Cursor.lockState = CursorLockMode.Locked;
-      Cursor.visible = false;
+      InputManager.Instance.LockCursor();
 
       Time.timeScale = 1f;
     }

@@ -20,6 +20,8 @@ public class MenuUIController : MonoBehaviour {
     ToggleMenu(toggleOn: false);
   }
 
+  const KeyCode ToggleMenuPanelKeyCode = KeyCode.F2;
+
   void Update() {
     if (Input.GetKeyDown(KeyCode.F2)) {
       ToggleMenu(!MenuPanel.activeSelf);
@@ -38,7 +40,23 @@ public class MenuUIController : MonoBehaviour {
               toggleOn ? -100f : 0f,
               1f)
         .SetUpdate(true)
-        .OnStart(() => _colorGradingEffect.enabled.value = true)
-        .OnComplete(() => _colorGradingEffect.enabled.value = toggleOn);
+        .SetEase(Ease.Linear);
+
+    if (toggleOn) {
+      InputManager.Instance.UnlockCursor();
+      Time.timeScale = 0f;
+    } else {
+      InputManager.Instance.LockCursor();
+      Time.timeScale = 1f;
+    }
+  }
+
+  public void OnQuitButton() {
+    Debug.Log("Button is quit.");
+#if UNITY_EDITOR
+    UnityEditor.EditorApplication.isPlaying = false;
+#else
+    Application.Quit();
+#endif
   }
 }
