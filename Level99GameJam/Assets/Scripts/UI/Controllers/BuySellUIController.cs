@@ -13,10 +13,10 @@ public class BuySellUIController : MonoBehaviour {
   public Button BuySellButton { get; private set; }
 
   [field: SerializeField]
-  public TMPro.TMP_Text ButtonLabel { get; private set; }
+  public TMPro.TMP_Text BuySellButtonLabel { get; private set; }
 
   [field: SerializeField]
-  public UIEffect ButtonDisableEffect { get; private set; }
+  public UIEffect BuySellButtonDisableEffect { get; private set; }
 
   [field: SerializeField, Header("BuySellCost")]
   public TMPro.TMP_Text CostValue { get; private set; }
@@ -51,8 +51,8 @@ public class BuySellUIController : MonoBehaviour {
             .Insert(
                 0f,
                 DOTween.To(
-                    () => ButtonDisableEffect.effectFactor,
-                    x => ButtonDisableEffect.effectFactor = x,
+                    () => BuySellButtonDisableEffect.effectFactor,
+                    x => BuySellButtonDisableEffect.effectFactor = x,
                     canBuySell ? 0f : 1f,
                     0.10f))
             .Insert(
@@ -66,10 +66,10 @@ public class BuySellUIController : MonoBehaviour {
     if (canBuySell) {
       sequence
           .Insert(0f, CostLabel.DOFade(0f, 0.1f))
-          .Insert(0f, ButtonLabel.DOFade(1f, 0.1f));
+          .Insert(0f, BuySellButtonLabel.DOFade(1f, 0.1f));
     } else {
       sequence
-          .Insert(0f, ButtonLabel.DOFade(0.4f, 0.1f))
+          .Insert(0f, BuySellButtonLabel.DOFade(0.4f, 0.1f))
           .Insert(0f, CostLabel.transform.DOPunchPosition(new Vector3(0f, 5f, 0f), 0.1f))
           .Insert(0f, CostLabel.DOFade(1f, 0.1f));
     }

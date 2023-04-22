@@ -5,7 +5,7 @@ public class InventoryItemData : ScriptableObject {
   public enum InventoryItemType {
     None,
     Loot,
-    Upgrade
+    Equipment
   }
 
   [field: SerializeField]

@@ -10,4 +10,10 @@ public class ItemSlotUIController : MonoBehaviour {
 
   [field: SerializeField]
   public Button ItemButton { get; private set; }
+
+  [field: SerializeField, Header("Badge")]
+  public GameObject ItemBadge { get; private set; }
+
+  [field: SerializeField]
+  public TMPro.TMP_Text BadgeLabel { get; private set; }
 }
