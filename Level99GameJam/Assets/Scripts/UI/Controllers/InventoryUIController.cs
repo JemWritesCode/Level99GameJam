@@ -4,10 +4,17 @@ using DG.Tweening;
 
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class InventoryUIController : MonoBehaviour {
   [field: SerializeField, Header("UI")]
   public CanvasGroup InventoryPanel { get; private set; }
+
+  [field: SerializeField, Header("Title")]
+  public TMPro.TMP_Text TitleText { get; private set; }
+
+  [field: SerializeField]
+  public Image TitleBackground { get; private set; }
 
   [field: SerializeField, Header("ItemList")]
   public RectTransform ItemListContent { get; private set; }
@@ -35,16 +42,16 @@ public class InventoryUIController : MonoBehaviour {
   [field: SerializeField]
   public TreasuryUIController TreasuryUI { get; private set; }
 
-  [field: SerializeField, Header("State")]
-  public float PlayerCoinsValue { get; private set; } = 0f;
-
   SUPERCharacter.SUPERCharacterAIO _superCharacterController;
 
   EventSystem _eventSystem;
+
+  readonly List<GameObject> _itemSlots = new();
   GameObject _selectedItemSlot;
 
   bool _isVisible = false;
-  RectTransform _inventoryPanelRectTransform;
+  bool _isShopVisible = false;
+
   Sequence _toggleInventoryPanelSequence;
 
   void Awake() {
@@ -57,7 +64,7 @@ public class InventoryUIController : MonoBehaviour {
     _eventSystem = EventSystem.current;
 
     _isVisible = false;
-    _inventoryPanelRectTransform = InventoryPanel.GetComponent<RectTransform>();
+    _isShopVisible = false;
 
     InventoryPanel.alpha = 0f;
     InventoryPanel.blocksRaycasts = false;
@@ -73,25 +80,14 @@ public class InventoryUIController : MonoBehaviour {
             .SetAutoKill(false)
             .Pause();
 
-    foreach (InventoryItemData itemData in InventoryManager.Instance.PlayerInventory) {
-      AddPlayerItem(itemData);
-    }
-
-    foreach (InventoryItemData itemData in InventoryManager.Instance.ShopInventory) {
-      AddShopItem(itemData);
-    }
-
     ItemInfoUI.ResetPanel();
     BuySellUI.ResetPanel();
     TreasuryUI.ResetPanel();
-
-    TreasuryUI.SetCoinsValue((int) PlayerCoinsValue);
   }
 
   void Update() {
     if (Input.GetKeyDown(KeyCode.Tab)) {
-      _isVisible = !_isVisible;
-      ToggleInventoryPanel(_isVisible, Input.GetKey(KeyCode.LeftShift));
+      ToggleInventoryPanel(!_isVisible, Input.GetKey(KeyCode.LeftShift));
     }
 
     if (_selectedItemSlot && _eventSystem.currentSelectedGameObject != _selectedItemSlot) {
@@ -100,14 +96,15 @@ public class InventoryUIController : MonoBehaviour {
   }
 
   public void CloseInventoryPanel() {
-    _isVisible = false;
-    ToggleInventoryPanel(_isVisible);
+    ToggleInventoryPanel(false);
   }
 
-  public void ToggleInventoryPanel(bool toggleOn, bool showShopList = false) {
+  public void ToggleInventoryPanel(bool toggleOn, bool isShopping = false) {
+    _isVisible = toggleOn;
+
     if (toggleOn) {
-      ShopItemList.SetActive(showShopList);
-      _inventoryPanelRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, showShopList ? 640f : 450f);
+      SetInventoryPanelState();
+      ToggleShopPanel(isShopping);
 
       _toggleInventoryPanelSequence.PlayForward();
 
@@ -133,41 +130,75 @@ public class InventoryUIController : MonoBehaviour {
     }
   }
 
-  public void AddPlayerItem() {
-    InventoryItemData itemData = CurrentInventory[Random.Range(0, CurrentInventory.Count)];
-    AddPlayerItem(itemData);
+  void SetInventoryPanelState() {
+    foreach (GameObject itemSlot in _itemSlots) {
+      Destroy(itemSlot);
+    }
+
+    _itemSlots.Clear();
+
+    foreach (InventoryItemData itemData in InventoryManager.Instance.PlayerInventory) {
+      AddPlayerItem(itemData);
+    }
+
+    foreach (InventoryItemData itemData in InventoryManager.Instance.ShopInventory) {
+      AddShopItem(itemData);
+    }
+
+    ItemInfoUI.ResetPanel();
+    BuySellUI.ResetPanel();
+    TreasuryUI.ResetPanel((int) InventoryManager.Instance.PlayerCurrentCoins);
+  }
+
+  void ToggleShopPanel(bool toggleOn) {
+    _isShopVisible = toggleOn;
+
+    ShopItemList.SetActive(toggleOn);
+    TitleText.SetText(toggleOn ? "Shopping" : "Inventory");
+    InventoryPanel.RectTransform().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, toggleOn ? 640f : 450f);
   }
 
   public void AddPlayerItem(InventoryItemData itemData) {
     GameObject itemSlot = Instantiate(ItemSlotTemplate, ItemListContent);
-    ItemSlotUIController itemSlotController = itemSlot.GetComponent<ItemSlotUIController>();
+    ItemSlotUIController itemSlotUI = itemSlot.GetComponent<ItemSlotUIController>();
 
-    bool showBadge = itemData.ItemType == InventoryItemData.InventoryItemType.Equipment;
+    itemSlotUI.ItemLabel.text = itemData.ItemName;
+    itemSlotUI.ItemImage.sprite = itemData.ItemSprite;
+    itemSlotUI.ItemButton.onClick.AddListener(() => OnPlayerItemClicked(itemSlot, itemData));
+    itemSlotUI.ItemBadge.SetActive(itemData.ItemType == InventoryItemData.InventoryItemType.Equipment);
 
-    itemSlotController.ItemLabel.text = itemData.ItemName;
-    itemSlotController.ItemImage.sprite = itemData.ItemSprite;
-    itemSlotController.ItemButton.onClick.AddListener(
-        () => {
-          _selectedItemSlot = itemSlot;
-          ItemInfoUI.SetPanel(itemData.ItemName, itemData.ItemDescription, showBadge);
-
-          BuySellUI.BuySellButton.onClick.RemoveAllListeners();
-
-          if (itemData.ItemType != InventoryItemData.InventoryItemType.Loot) {
-            BuySellUI.HidePanel();
-          } else {
-            BuySellUI.SetPanel((int) itemData.ItemCost, itemData.ItemCost < 500);
-            BuySellUI.BuySellButton.onClick.AddListener(() => SellItem(itemData));
-          }
-        });
-
-    itemSlotController.ItemBadge.SetActive(showBadge);
     itemSlot.SetActive(true);
+    _itemSlots.Add(itemSlot);
   }
 
-  public void SellItem(InventoryItemData itemData) {
-    PlayerCoinsValue += itemData.ItemCost;
-    TreasuryUI.SetCoinsValue(Mathf.RoundToInt(PlayerCoinsValue));
+  public void OnPlayerItemClicked(GameObject itemSlot, InventoryItemData itemData) {
+    _selectedItemSlot = itemSlot;
+
+    ItemInfoUI.SetPanel(
+        itemData.ItemName,
+        itemData.ItemDescription,
+        showBadge: itemData.ItemType == InventoryItemData.InventoryItemType.Equipment);
+
+    BuySellUI.BuySellButton.onClick.RemoveAllListeners();
+
+    if (_isShopVisible && itemData.ItemType == InventoryItemData.InventoryItemType.Loot) {
+      BuySellUI.BuySellButtonLabel.text = "Sell";
+      BuySellUI.SetPanel((int) itemData.ItemCost, canBuySell: true);
+      BuySellUI.BuySellButton.onClick.AddListener(() => SellPlayerItem(itemSlot, itemData));
+    } else {
+      BuySellUI.HidePanel();
+    }
+  }
+
+  public void SellPlayerItem(GameObject itemSlot, InventoryItemData itemData) {
+    InventoryManager.Instance.PlayerInventory.Remove(itemData);
+    InventoryManager.Instance.PlayerCurrentCoins += itemData.ItemCost;
+    TreasuryUI.SetCoinsValue(Mathf.RoundToInt(InventoryManager.Instance.PlayerCurrentCoins));
+
+    Destroy(itemSlot);
+
+    ItemInfoUI.HidePanel();
+    BuySellUI.HidePanel();
   }
 
   public void AddShopItem(InventoryItemData itemData) {
@@ -180,6 +211,7 @@ public class InventoryUIController : MonoBehaviour {
     itemSlotUI.ItemButton.onClick.AddListener(() => OnShopItemClicked(itemSlot, itemData));
 
     itemSlot.SetActive(true);
+    _itemSlots.Add(itemSlot);
   }
 
   public void OnShopItemClicked(GameObject itemSlot, InventoryItemData itemData) {
@@ -187,15 +219,17 @@ public class InventoryUIController : MonoBehaviour {
     ItemInfoUI.SetPanel(itemData.ItemName, itemData.ItemDescription, showBadge: false);
 
     BuySellUI.BuySellButtonLabel.text = "Buy";
-    BuySellUI.SetPanel((int) itemData.ItemCost, PlayerCoinsValue >= itemData.ItemCost);
+    BuySellUI.SetPanel((int) itemData.ItemCost, InventoryManager.Instance.PlayerCurrentCoins >= itemData.ItemCost);
 
     BuySellUI.BuySellButton.onClick.RemoveAllListeners();
     BuySellUI.BuySellButton.onClick.AddListener(() => BuyShopItem(itemSlot, itemData));
   }
 
   public void BuyShopItem(GameObject itemSlot, InventoryItemData itemData) {
-    PlayerCoinsValue -= itemData.ItemCost;
-    TreasuryUI.SetCoinsValue(Mathf.RoundToInt(PlayerCoinsValue));
+    InventoryManager.Instance.ShopInventory.Remove(itemData);
+    InventoryManager.Instance.PlayerInventory.Add(itemData);
+    InventoryManager.Instance.PlayerCurrentCoins -= itemData.ItemCost;
+    TreasuryUI.SetCoinsValue(Mathf.RoundToInt(InventoryManager.Instance.PlayerCurrentCoins));
 
     Destroy(itemSlot);
 

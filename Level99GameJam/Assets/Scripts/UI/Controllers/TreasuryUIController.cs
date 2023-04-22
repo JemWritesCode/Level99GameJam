@@ -23,9 +23,9 @@ public class TreasuryUIController : MonoBehaviour {
 
   int _currentCoinsValue = 0;
 
-  public void ResetPanel() {
-    _currentCoinsValue = 0;
-    CoinsValue.text = "0";
+  public void ResetPanel(int coinsValue = 0) {
+    _currentCoinsValue = coinsValue;
+    CoinsValue.text = $"{coinsValue:D0}";
   }
 
   public void SetCoinsValue(int coinsValue) {

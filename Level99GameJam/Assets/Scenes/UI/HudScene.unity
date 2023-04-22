@@ -162,7 +162,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 2.5}
-  m_SizeDelta: {x: 50, y: 20}
+  m_SizeDelta: {x: 60, y: 20}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &18700999
 MonoBehaviour:
@@ -589,7 +589,7 @@ RectTransform:
   m_Children:
   - {fileID: 1980524094}
   m_Father: {fileID: 2126802027}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -2080,6 +2080,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <InventoryPanel>k__BackingField: {fileID: 1911050859}
+  <TitleText>k__BackingField: {fileID: 729572284}
+  <TitleBackground>k__BackingField: {fileID: 304414481}
   <ItemListContent>k__BackingField: {fileID: 390298872}
   <ItemSlotTemplate>k__BackingField: {fileID: 2126802026}
   <ShopItemList>k__BackingField: {fileID: 1963273855}
@@ -2093,7 +2095,6 @@ MonoBehaviour:
   <ItemInfoUI>k__BackingField: {fileID: 1819798804}
   <BuySellUI>k__BackingField: {fileID: 2041086983}
   <TreasuryUI>k__BackingField: {fileID: 1766531877}
-  <PlayerCoinsValue>k__BackingField: 250
 --- !u!1 &829282036
 GameObject:
   m_ObjectHideFlags: 0
@@ -2216,8 +2217,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0ffb33e0ed3a1940b824b1917af226a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <PlayerCurrentCoins>k__BackingField: 250
   <PlayerInventory>k__BackingField:
   - {fileID: 11400000, guid: c6ce5d74e75561f44800a498248902f9, type: 2}
+  - {fileID: 11400000, guid: e0b750dcad424c146a511166f207314f, type: 2}
+  - {fileID: 11400000, guid: ba85f2f1fee285d4ba202b1e6251e30f, type: 2}
+  - {fileID: 11400000, guid: 0270bbf356b29b749b8344509beac853, type: 2}
   <ShopInventory>k__BackingField:
   - {fileID: 11400000, guid: b43b434d105d7cf48b863a32b66d2054, type: 2}
   - {fileID: 11400000, guid: d847a0799d66baa40898919d6a879202, type: 2}
@@ -2521,12 +2526,12 @@ RectTransform:
   m_GameObject: {fileID: 1135586935}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 939630331}
   m_Father: {fileID: 2126802027}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -4636,8 +4641,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1135586936}
   - {fileID: 341395660}
+  - {fileID: 1135586936}
   - {fileID: 1776178388}
   m_Father: {fileID: 390298872}
   m_RootOrder: 0
@@ -4669,9 +4674,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 0.43137258, g: 0.3529412, b: 0.26666668, a: 0.2509804}
-    m_PressedColor: {r: 0.36862746, g: 0.3019608, b: 0.227451, a: 0.5019608}
-    m_SelectedColor: {r: 0.43137258, g: 0.3529412, b: 0.26666668, a: 0.7529412}
+    m_HighlightedColor: {r: 0.43137258, g: 0.3529412, b: 0.26666668, a: 0.1882353}
+    m_PressedColor: {r: 0.36862746, g: 0.3019608, b: 0.227451, a: 0.3764706}
+    m_SelectedColor: {r: 0.43137258, g: 0.3529412, b: 0.26666668, a: 0.5019608}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1

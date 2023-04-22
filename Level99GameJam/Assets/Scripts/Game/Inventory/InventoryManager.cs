@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour {
-  [field: SerializeField]
+  [field: SerializeField, Header("Coins")]
+  public float PlayerCurrentCoins { get; set; } = 0f;
+
+  [field: SerializeField, Header("Inventory")]
   public List<InventoryItemData> PlayerInventory { get; private set; } = new();
 
   [field: SerializeField]
