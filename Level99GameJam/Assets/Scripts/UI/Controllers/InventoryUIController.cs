@@ -236,6 +236,11 @@ public class InventoryUIController : MonoBehaviour {
     TreasuryUI.SetCoinsValue(Mathf.RoundToInt(InventoryManager.Instance.PlayerCurrentCoins));
 
     Destroy(itemSlot);
-    OnPlayerItemClicked(AddPlayerItem(itemData), itemData);
+
+    GameObject playerItemSlot = AddPlayerItem(itemData);
+    ItemSlotUIController playerItemSlotUI = playerItemSlot.GetComponent<ItemSlotUIController>();
+    playerItemSlotUI.ItemBadge.transform.DOPunchScale(new(0.5f, 0.5f, 0.5f), 0.25f, 2, 0);
+
+    OnPlayerItemClicked(playerItemSlot, itemData);
   }
 }
