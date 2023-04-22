@@ -158,7 +158,7 @@ public class InventoryUIController : MonoBehaviour {
     InventoryPanel.RectTransform().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, toggleOn ? 640f : 450f);
   }
 
-  public void AddPlayerItem(InventoryItemData itemData) {
+  public GameObject AddPlayerItem(InventoryItemData itemData) {
     GameObject itemSlot = Instantiate(ItemSlotTemplate, ItemListContent);
     ItemSlotUIController itemSlotUI = itemSlot.GetComponent<ItemSlotUIController>();
 
@@ -168,7 +168,9 @@ public class InventoryUIController : MonoBehaviour {
     itemSlotUI.ItemBadge.SetActive(itemData.ItemType == InventoryItemData.InventoryItemType.Equipment);
 
     itemSlot.SetActive(true);
+
     _itemSlots.Add(itemSlot);
+    return itemSlot;
   }
 
   public void OnPlayerItemClicked(GameObject itemSlot, InventoryItemData itemData) {
@@ -201,7 +203,7 @@ public class InventoryUIController : MonoBehaviour {
     BuySellUI.HidePanel();
   }
 
-  public void AddShopItem(InventoryItemData itemData) {
+  public GameObject AddShopItem(InventoryItemData itemData) {
     GameObject itemSlot = Instantiate(ItemSlotTemplate, ShopItemListContent);
     ItemSlotUIController itemSlotUI = itemSlot.GetComponent<ItemSlotUIController>();
 
@@ -211,7 +213,9 @@ public class InventoryUIController : MonoBehaviour {
     itemSlotUI.ItemButton.onClick.AddListener(() => OnShopItemClicked(itemSlot, itemData));
 
     itemSlot.SetActive(true);
+
     _itemSlots.Add(itemSlot);
+    return itemSlot;
   }
 
   public void OnShopItemClicked(GameObject itemSlot, InventoryItemData itemData) {
@@ -232,10 +236,6 @@ public class InventoryUIController : MonoBehaviour {
     TreasuryUI.SetCoinsValue(Mathf.RoundToInt(InventoryManager.Instance.PlayerCurrentCoins));
 
     Destroy(itemSlot);
-
-    ItemInfoUI.HidePanel();
-    BuySellUI.HidePanel();
-
-    AddPlayerItem(itemData);
+    OnPlayerItemClicked(AddPlayerItem(itemData), itemData);
   }
 }
