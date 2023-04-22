@@ -45,7 +45,7 @@ public class InventoryUIController : MonoBehaviour {
 
   void Start() {
     GameObject player = GameObject.FindWithTag("Player");
-    _superCharacterController = player.GetComponent<SUPERCharacter.SUPERCharacterAIO>();
+    _superCharacterController = player ? player.GetComponent<SUPERCharacter.SUPERCharacterAIO>() : default;
     _eventSystem = EventSystem.current;
 
     _isVisible = false;
@@ -84,10 +84,18 @@ public class InventoryUIController : MonoBehaviour {
     }
   }
 
+  public void CloseInventoryPanel() {
+    _isVisible = false;
+    ToggleInventoryPanel(_isVisible);
+  }
+
   public void ToggleInventoryPanel(bool toggleOn) {
     if (toggleOn) {
       _toggleInventoryPanelSequence.PlayForward();
-      _superCharacterController.PausePlayer(SUPERCharacter.PauseModes.BlockInputOnly);
+
+      if (_superCharacterController) {
+        _superCharacterController.PausePlayer(SUPERCharacter.PauseModes.BlockInputOnly);
+      }
 
       Cursor.lockState = CursorLockMode.Confined;
       Cursor.visible = true;
@@ -95,7 +103,10 @@ public class InventoryUIController : MonoBehaviour {
       Time.timeScale = 0f;
     } else {
       _toggleInventoryPanelSequence.PlayBackwards();
-      _superCharacterController.UnpausePlayer();
+
+      if (_superCharacterController) {
+        _superCharacterController.UnpausePlayer();
+      }
 
       Cursor.lockState = CursorLockMode.Locked;
       Cursor.visible = false;
@@ -112,13 +123,16 @@ public class InventoryUIController : MonoBehaviour {
   public void AddItem(InventoryItemData itemData) {
     GameObject itemSlot = Instantiate(ItemSlotTemplate, ItemListContent);
     ItemSlotUIController itemSlotController = itemSlot.GetComponent<ItemSlotUIController>();
-    
+
+    bool showBadge = itemData.ItemType == InventoryItemData.InventoryItemType.Upgrade;
+
     itemSlotController.ItemLabel.text = itemData.ItemName;
     itemSlotController.ItemImage.sprite = itemData.ItemSprite;
     itemSlotController.ItemButton.onClick.AddListener(
         () => {
           _selectedItemSlot = itemSlot;
-          ItemInfoUI.SetPanel(itemData.ItemName, itemData.ItemDescription);
+          ItemInfoUI.SetPanel(itemData.ItemName, itemData.ItemDescription, showBadge);
+
           BuySellUI.BuySellButton.onClick.RemoveAllListeners();
 
           if (itemData.ItemType != InventoryItemData.InventoryItemType.Loot) {
@@ -128,6 +142,8 @@ public class InventoryUIController : MonoBehaviour {
             BuySellUI.BuySellButton.onClick.AddListener(() => SellItem(itemData));
           }
         });
+
+    itemSlotController.ItemBadge.SetActive(showBadge);
 
     itemSlot.SetActive(true);
   }
