@@ -52,7 +52,7 @@ public class InputManager : MonoBehaviour {
     }
 
     if (Input.GetKeyDown(KeyCode.Tab) && !MenuUI.MenuPanel.activeSelf) {
-      InventoryUI.ToggleInventoryPanel(!InventoryUI.IsVisible);
+      InventoryUI.ToggleInventoryPanel(!InventoryUI.IsVisible, Input.GetKey(KeyCode.LeftShift));
     }
   }
 
