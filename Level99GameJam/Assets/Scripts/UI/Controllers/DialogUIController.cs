@@ -6,16 +6,29 @@ public class DialogUIController : MonoBehaviour {
   [field: SerializeField, Header("UI")]
   public CanvasGroup DialogPanel { get; private set; }
 
-  private void OnEnable() {
-    OpenDialog();
+  [field: SerializeField]
+  public TMPro.TMP_Text DialogTitle { get; private set; }
+
+  [field: SerializeField]
+  public TMPro.TMP_Text DialogText { get; private set; }
+
+  [field: SerializeField]
+  public TMPro.TMP_Text DialogConfirmText { get; private set; }
+
+  public void ResetDialog() {
+    DialogPanel.blocksRaycasts = false;
+    DialogPanel.alpha = 0f;
   }
 
-  public void OpenDialog() {
+  public void OpenDialog(DialogData dialogData) {
     DialogPanel.blocksRaycasts = true;
+    DialogTitle.text = dialogData.DialogTitle;
+    DialogText.text = dialogData.DialogText;
+    DialogConfirmText.text = dialogData.DialogConfirmText;
 
     DOTween.Complete(this, withCallbacks: true);
     DOTween.Sequence()
-        .InsertCallback(0f, () => InputManager.Instance.CurrentDialogUI = this)
+        .InsertCallback(0f, () => InputManager.Instance.SetCurrentDialogUI(this))
         .InsertCallback(0.1f, () => InputManager.Instance.UnlockCursor())
         .Insert(0f, DialogPanel.DOFade(1f, 0.1f))
         .SetTarget(this)
@@ -28,7 +41,7 @@ public class DialogUIController : MonoBehaviour {
 
     DOTween.Complete(this, withCallbacks: true);
     DOTween.Sequence()
-        .InsertCallback(0f, () => InputManager.Instance.CurrentDialogUI = default)
+        .InsertCallback(0f, () => InputManager.Instance.SetCurrentDialogUI(default))
         .InsertCallback(0.1f, () => InputManager.Instance.LockCursor())
         .Insert(0f, DialogPanel.DOFade(0f, 0.1f))
         .SetTarget(this)

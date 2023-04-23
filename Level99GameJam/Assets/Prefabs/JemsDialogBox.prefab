@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 32
   m_Viewport: {fileID: 3055332257997205823}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 3055332259184138981}
@@ -708,6 +708,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DialogPanel>k__BackingField: {fileID: 1057183065495233498}
+  <DialogTitle>k__BackingField: {fileID: 3055332257787996981}
+  <DialogText>k__BackingField: {fileID: 3055332258284608467}
+  <DialogConfirmText>k__BackingField: {fileID: 3055332258777972808}
 --- !u!1 &3055332258733982956
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,8 +1030,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3055332258733982954}
   m_HandleRect: {fileID: 3055332258733982957}
   m_Direction: 2
-  m_Value: 0.9999997
-  m_Size: 0.67840683
+  m_Value: 1
+  m_Size: 0.6784069
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

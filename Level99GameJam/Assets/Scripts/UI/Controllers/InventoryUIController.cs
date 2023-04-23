@@ -28,9 +28,6 @@ public class InventoryUIController : MonoBehaviour {
   [field: SerializeField]
   public RectTransform ShopItemListContent { get; private set; }
 
-  [field: SerializeField, Header("Inventory")]
-  public List<InventoryItemData> CurrentInventory { get; private set; } = new();
-
   [field: Header("Controllers")]
 
   [field: SerializeField]
@@ -42,6 +39,8 @@ public class InventoryUIController : MonoBehaviour {
   [field: SerializeField]
   public TreasuryUIController TreasuryUI { get; private set; }
 
+  [field: SerializeField]
+  public DialogUIController DialogUI { get; private set; }
 
   EventSystem _eventSystem;
 
@@ -81,6 +80,7 @@ public class InventoryUIController : MonoBehaviour {
     ItemInfoUI.ResetPanel();
     BuySellUI.ResetPanel();
     TreasuryUI.ResetPanel();
+    DialogUI.ResetDialog();
   }
 
   void Update() {
@@ -172,10 +172,10 @@ public class InventoryUIController : MonoBehaviour {
       BuySellUI.BuySellButtonLabel.text = "Sell";
       BuySellUI.SetPanel((int) itemData.ItemCost, canBuySell: true);
       BuySellUI.BuySellButton.onClick.AddListener(() => SellPlayerItem(itemSlot, itemData));
-    } else if (itemData.ItemType == InventoryItemData.InventoryItemType.Clue) {
+    } else if (itemData.ItemType == InventoryItemData.InventoryItemType.Clue && itemData.ClueDialogData) {
       BuySellUI.BuySellButtonLabel.text = "Read";
       BuySellUI.SetPanel((int) itemData.ItemCost, canBuySell: true, isClue: true);
-      BuySellUI.BuySellButton.onClick.AddListener(() => Debug.Log("Boo!"));
+      BuySellUI.BuySellButton.onClick.AddListener(() => DialogUI.OpenDialog(itemData.ClueDialogData));
     } else {
       BuySellUI.HidePanel();
     }

@@ -47,8 +47,8 @@ public class InputManager : MonoBehaviour {
     if (Input.GetKeyDown(ToggleMenuKey)) {
       bool toggleOn = !MenuUI.MenuPanel.activeSelf;
 
-      if (toggleOn && InventoryUI.IsVisible) {
-        InventoryUI.ToggleInventoryPanel(false);
+      if (InventoryUI.IsVisible) {
+        InventoryUI.InventoryPanel.blocksRaycasts = !toggleOn;
       }
 
       MenuUI.ToggleMenu(toggleOn, shouldSkipLockUnlock: CurrentDialogUI);
@@ -59,7 +59,15 @@ public class InputManager : MonoBehaviour {
     }
   }
 
-  public DialogUIController CurrentDialogUI { get; set; }
+  public DialogUIController CurrentDialogUI { get; private set; }
+
+  public void SetCurrentDialogUI(DialogUIController dialogUI) {
+    CurrentDialogUI = dialogUI;
+
+    if (InventoryUI.IsVisible) {
+      InventoryUI.InventoryPanel.blocksRaycasts = !CurrentDialogUI;
+    }
+  }
 
   SUPERCharacter.SUPERCharacterAIO _playerCharacterController;
 
@@ -75,6 +83,10 @@ public class InputManager : MonoBehaviour {
   }
 
   public void LockCursor() {
+    if (MenuUI.IsVisible || InventoryUI.IsVisible || CurrentDialogUI) {
+      return;
+    }
+
     PlayerCharacterController.UnpausePlayer();
 
     Cursor.lockState = CursorLockMode.Locked;
