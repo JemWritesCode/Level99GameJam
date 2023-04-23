@@ -24,7 +24,7 @@ public class MenuUIController : MonoBehaviour {
     MenuPanel.SetActive(false);
   }
 
-  public void ToggleMenu(bool toggleOn) {
+  public void ToggleMenu(bool toggleOn, bool shouldSkipLockUnlock = false) {
     MenuPanel.SetActive(toggleOn);
 
     _depthOfFieldEffect.enabled.value = toggleOn;
@@ -37,6 +37,10 @@ public class MenuUIController : MonoBehaviour {
               1f)
         .SetUpdate(true)
         .SetEase(Ease.Linear);
+
+    if (shouldSkipLockUnlock) {
+      return;
+    }
 
     if (toggleOn) {
       InputManager.Instance.UnlockCursor();
