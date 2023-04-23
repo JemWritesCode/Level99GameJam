@@ -1,20 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Shopkeeper : MonoBehaviour
-{
-    GameObject inventoryUIController;
-    InventoryUIController inventoryUIControllerComponent;
+public class Shopkeeper : MonoBehaviour {
+  [field: SerializeField]
+  public InventoryUIController InventoryUI { get; private set; }
 
-    private void Start()
-    {
-        inventoryUIController = GameObject.Find("InventoryUIController");
-        inventoryUIControllerComponent = inventoryUIController.GetComponent<InventoryUIController>();
-    }
-
-    public void openShop()
-    {
-        inventoryUIControllerComponent.ToggleInventoryPanel(true, true);
-    }
+  public void OpenShop() {
+    InventoryUI.ToggleInventoryPanel(true, true);
+  }
 }
