@@ -9,6 +9,8 @@ public class InteractUIController : MonoBehaviour {
   [field: SerializeField]
   public TMPro.TMP_Text InteractText { get; private set; }
 
+  public bool IsVisible { get; private set; } = false;
+
   private void Awake() {
     ResetPanel();
   }
@@ -17,10 +19,12 @@ public class InteractUIController : MonoBehaviour {
     InteractPanel.alpha = 0f;
     InteractPanel.blocksRaycasts = false;
     InteractText.text = "...";
+    IsVisible = false;
   }
 
   public void ShowInteractPanel(string interactText) {
     InteractText.text = interactText;
+    IsVisible = true;
 
     InteractPanel.DOComplete(withCallbacks: true);
 
@@ -31,6 +35,7 @@ public class InteractUIController : MonoBehaviour {
   }
 
   public void HideInteractPanel() {
+    IsVisible = false;
     InteractPanel.DOComplete(withCallbacks: false);
     InteractPanel.DOFade(0f, 0.1f);
   }
