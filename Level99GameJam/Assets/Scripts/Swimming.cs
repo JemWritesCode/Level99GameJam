@@ -8,6 +8,7 @@ public class Swimming : MonoBehaviour
 {
 
     [SerializeField] AudioSource underWaterSound;
+    [SerializeField] AudioSource aboveWaterSound;
     public float swimSpeed = 1f;
     public Transform target;
 
@@ -35,6 +36,7 @@ public class Swimming : MonoBehaviour
     {
         Debug.Log("I'm underwater");
         underWaterSound.Play();
+        aboveWaterSound.Pause();
         SwimMovement();
         isBelowWater = true;
 
@@ -57,6 +59,7 @@ public class Swimming : MonoBehaviour
     public void isNotUnderwater()
     {
         Debug.Log("I'm NOT underwater");
+        aboveWaterSound.Play();
         underWaterSound.Pause();
         StopSwimMovement();
         isBelowWater = false;
