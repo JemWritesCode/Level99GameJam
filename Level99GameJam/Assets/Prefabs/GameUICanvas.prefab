@@ -811,7 +811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.43137255, g: 0.40392157, b: 0.36862746, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -835,7 +835,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8485002934254644232}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3fb48d82dc0e94a2b9246d17d04f8748, type: 3}
   m_Name: 
@@ -1887,6 +1887,7 @@ MonoBehaviour:
   <ItemLabel>k__BackingField: {fileID: 8485002934886913706}
   <ItemButton>k__BackingField: {fileID: 8485002934601313811}
   <ItemBadge>k__BackingField: {fileID: 8485002934254644232}
+  <BadgeImage>k__BackingField: {fileID: 8485002934254644230}
   <BadgeLabel>k__BackingField: {fileID: 8485002935720942723}
 --- !u!1 &8485002934623536763
 GameObject:

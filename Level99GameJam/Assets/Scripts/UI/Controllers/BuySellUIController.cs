@@ -37,7 +37,7 @@ public class BuySellUIController : MonoBehaviour {
     _currentCostValue = 0;
   }
 
-  public void SetPanel(int costValue, bool canBuySell) {
+  public void SetPanel(int costValue, bool canBuySell, bool isClue = false) {
     BuySellPanel.blocksRaycasts = canBuySell;
 
     DOTween.Complete(BuySellPanel, withCallbacks: true);
@@ -60,7 +60,7 @@ public class BuySellUIController : MonoBehaviour {
                 DOTween.To(
                     () => CostDisableEffect.effectFactor,
                     x => CostDisableEffect.effectFactor = x,
-                    canBuySell ? 0f : 1f,
+                    canBuySell && !isClue ? 0f : 1f,
                     0.10f));
 
     if (canBuySell) {

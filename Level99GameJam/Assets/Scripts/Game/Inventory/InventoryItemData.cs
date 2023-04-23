@@ -5,7 +5,8 @@ public class InventoryItemData : ScriptableObject {
   public enum InventoryItemType {
     None,
     Loot,
-    Equipment
+    Equipment,
+    Clue
   }
 
   [field: SerializeField]
@@ -21,6 +22,9 @@ public class InventoryItemData : ScriptableObject {
 
   [field: SerializeField]
   public Sprite ItemSprite { get; private set; }
+
+  [field: SerializeField]
+  public Color ItemSpriteColor { get; private set; } = Color.white;
 
   [field: SerializeField]
   public string ItemName { get; private set; }

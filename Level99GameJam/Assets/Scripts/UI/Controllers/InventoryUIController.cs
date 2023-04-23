@@ -149,11 +149,8 @@ public class InventoryUIController : MonoBehaviour {
   public GameObject AddPlayerItem(InventoryItemData itemData) {
     GameObject itemSlot = Instantiate(ItemSlotTemplate, ItemListContent);
     ItemSlotUIController itemSlotUI = itemSlot.GetComponent<ItemSlotUIController>();
-
-    itemSlotUI.ItemLabel.text = itemData.ItemName;
-    itemSlotUI.ItemImage.sprite = itemData.ItemSprite;
+    itemSlotUI.SetupItemSlot(itemData);
     itemSlotUI.ItemButton.onClick.AddListener(() => OnPlayerItemClicked(itemSlot, itemData));
-    itemSlotUI.ItemBadge.SetActive(itemData.ItemType == InventoryItemData.InventoryItemType.Equipment);
 
     itemSlot.SetActive(true);
 
@@ -175,6 +172,10 @@ public class InventoryUIController : MonoBehaviour {
       BuySellUI.BuySellButtonLabel.text = "Sell";
       BuySellUI.SetPanel((int) itemData.ItemCost, canBuySell: true);
       BuySellUI.BuySellButton.onClick.AddListener(() => SellPlayerItem(itemSlot, itemData));
+    } else if (itemData.ItemType == InventoryItemData.InventoryItemType.Clue) {
+      BuySellUI.BuySellButtonLabel.text = "Read";
+      BuySellUI.SetPanel((int) itemData.ItemCost, canBuySell: true, isClue: true);
+      BuySellUI.BuySellButton.onClick.AddListener(() => Debug.Log("Boo!"));
     } else {
       BuySellUI.HidePanel();
     }
@@ -195,9 +196,7 @@ public class InventoryUIController : MonoBehaviour {
   public GameObject AddShopItem(InventoryItemData itemData) {
     GameObject itemSlot = Instantiate(ItemSlotTemplate, ShopItemListContent);
     ItemSlotUIController itemSlotUI = itemSlot.GetComponent<ItemSlotUIController>();
-
-    itemSlotUI.ItemLabel.text = itemData.ItemName;
-    itemSlotUI.ItemImage.sprite = itemData.ItemSprite;
+    itemSlotUI.SetupItemSlot(itemData);
     itemSlotUI.ItemBadge.SetActive(false);
     itemSlotUI.ItemButton.onClick.AddListener(() => OnShopItemClicked(itemSlot, itemData));
 
