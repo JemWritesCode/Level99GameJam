@@ -40,7 +40,7 @@ public class InputManager : MonoBehaviour {
 #if UNITY_EDITOR
   public const KeyCode ToggleMenuKey = KeyCode.F2;
 #else
-  public const KeyCode ToggleMenuKey = KeyCode.F3;
+  public const KeyCode ToggleMenuKey = KeyCode.Escape;
 #endif
 
   void Update() {
