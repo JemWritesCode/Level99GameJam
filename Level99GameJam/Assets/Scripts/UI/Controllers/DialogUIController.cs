@@ -6,12 +6,25 @@ public class DialogUIController : MonoBehaviour {
   [field: SerializeField, Header("UI")]
   public CanvasGroup DialogPanel { get; private set; }
 
-  private void OnEnable() {
-    OpenDialog();
+  [field: SerializeField]
+  public TMPro.TMP_Text DialogTitle { get; private set; }
+
+  [field: SerializeField]
+  public TMPro.TMP_Text DialogText { get; private set; }
+
+  [field: SerializeField]
+  public TMPro.TMP_Text DialogConfirmText { get; private set; }
+
+  public void ResetDialog() {
+    DialogPanel.blocksRaycasts = false;
+    DialogPanel.alpha = 0f;
   }
 
-  public void OpenDialog() {
+  public void OpenDialog(DialogData dialogData) {
     DialogPanel.blocksRaycasts = true;
+    DialogTitle.text = dialogData.DialogTitle;
+    DialogText.text = dialogData.DialogText;
+    DialogConfirmText.text = dialogData.DialogConfirmText;
 
     DOTween.Complete(this, withCallbacks: true);
     DOTween.Sequence()

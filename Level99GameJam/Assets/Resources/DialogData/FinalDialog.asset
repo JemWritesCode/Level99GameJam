@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c95576bd0cc24e45a2523b9530f9f16, type: 3}
+  m_Name: FinalDialog
+  m_EditorClassIdentifier: 
+  <DialogId>k__BackingField: FinalDialog
+  <DialogTitle>k__BackingField: You Win!
+  <DialogText>k__BackingField: 'The biggest box in the room is clearly the pirate''s
+    most precious prize.
+
+
+    You open it to find a box full of dusty notes and
+    faded maps.
+
+
+    It seems this may not be your last adventure...
+
+
+
+    Thank
+    you for playing our game!
+
+    - JemWritesCode & redseiko'
+  <DialogConfirmText>k__BackingField: Yay!

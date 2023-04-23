@@ -15,12 +15,13 @@ public class InventoryItemData : ScriptableObject {
   [field: SerializeField]
   public string ItemTag { get; private set; } = string.Empty;
 
-  [field: SerializeField]
+  [field: SerializeField, Header("Clue")]
+  public DialogData ClueDialogData { get; private set; }
+
+  [field: SerializeField, Header("Cost")]
   public float ItemCost { get; private set; }
 
-  [field: Header("UI")]
-
-  [field: SerializeField]
+  [field: SerializeField, Header("UI")]
   public Sprite ItemSprite { get; private set; }
 
   [field: SerializeField]

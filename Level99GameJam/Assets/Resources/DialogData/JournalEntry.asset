@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c95576bd0cc24e45a2523b9530f9f16, type: 3}
+  m_Name: JournalEntry
+  m_EditorClassIdentifier: 
+  <DialogId>k__BackingField: JournalEntry
+  <DialogTitle>k__BackingField: Journal Entry
+  <DialogText>k__BackingField: "Date: March 8, 2023\nLocation: Caribbean\nWeather:
+    Sunny, with a slight breeze\n\nToday was a momentous day. After years of searching,
+    we finally found the map to the pirate cove. It was hidden in a secret compartment
+    in an old book that we found in a dusty library.\n\nThe map was old and faded,
+    but we were able to make out the details. It showed the location of a small island
+    in the Caribbean. It mentions a great treasure\u2026\r\n\nWe have been studying
+    pirates for our entire lives, and this is our chance to make a real discovery.\n\nWe
+    know that the treasure is out there, and we are determined to find it.\r\n\nWe
+    are leaving tomorrow morning.\n\nWe are not sure how long it will take us to
+    find the treasure, but we are determined to succeed."
+  <DialogConfirmText>k__BackingField: OK

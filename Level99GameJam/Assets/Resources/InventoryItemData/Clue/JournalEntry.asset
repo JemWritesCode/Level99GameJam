@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemType>k__BackingField: 3
   <ItemTag>k__BackingField: JournalEntry
+  <ClueDialogData>k__BackingField: {fileID: 11400000, guid: 655c74ea83d206741a92d09a5d68c52b, type: 2}
   <ItemCost>k__BackingField: 0
   <ItemSprite>k__BackingField: {fileID: 21300000, guid: 8b440f9b56362fa439cf6777ae8e66b7, type: 3}
   <ItemSpriteColor>k__BackingField: {r: 1, g: 0.9316776, b: 0.495283, a: 1}
