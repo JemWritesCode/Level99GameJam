@@ -336,7 +336,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3055332257924940803}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2277556795604224340}
+        m_TargetAssemblyTypeName: DialogUIController, Assembly-CSharp
+        m_MethodName: CloseDialog
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3055332257924940805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,7 +370,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3055332257924940806}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8b2ed11d675446c5a49da1ea296d490, type: 3}
   m_Name: 
@@ -601,6 +613,8 @@ GameObject:
   - component: {fileID: 3055332258468339005}
   - component: {fileID: 3055332258468339003}
   - component: {fileID: 3055332258468339002}
+  - component: {fileID: 1057183065495233498}
+  - component: {fileID: 2277556795604224340}
   m_Layer: 5
   m_Name: JemsDialogBox
   m_TagString: Untagged
@@ -669,6 +683,31 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 2
+--- !u!225 &1057183065495233498
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3055332258468339004}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &2277556795604224340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3055332258468339004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 985644f56f3cc954090af94759c8489f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DialogPanel>k__BackingField: {fileID: 1057183065495233498}
 --- !u!1 &3055332258733982956
 GameObject:
   m_ObjectHideFlags: 0
@@ -988,8 +1027,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3055332258733982954}
   m_HandleRect: {fileID: 3055332258733982957}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.6784069
+  m_Value: 0.9999997
+  m_Size: 0.67840683
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

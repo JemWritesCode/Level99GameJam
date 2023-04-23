@@ -51,13 +51,15 @@ public class InputManager : MonoBehaviour {
         InventoryUI.ToggleInventoryPanel(false);
       }
 
-      MenuUI.ToggleMenu(toggleOn);
+      MenuUI.ToggleMenu(toggleOn, shouldSkipLockUnlock: CurrentDialogUI);
     }
 
-    if (Input.GetKeyDown(KeyCode.Tab) && !MenuUI.MenuPanel.activeSelf) {
+    if (Input.GetKeyDown(KeyCode.Tab) && !MenuUI.MenuPanel.activeSelf && !CurrentDialogUI) {
       InventoryUI.ToggleInventoryPanel(!InventoryUI.IsVisible, Input.GetKey(KeyCode.LeftShift));
     }
   }
+
+  public DialogUIController CurrentDialogUI { get; set; }
 
   SUPERCharacter.SUPERCharacterAIO _playerCharacterController;
 
