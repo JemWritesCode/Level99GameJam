@@ -172,6 +172,10 @@ public class InventoryUIController : MonoBehaviour {
       BuySellUI.BuySellButtonLabel.text = "Sell";
       BuySellUI.SetPanel((int) itemData.ItemCost, canBuySell: true);
       BuySellUI.BuySellButton.onClick.AddListener(() => SellPlayerItem(itemSlot, itemData));
+    } else if (itemData.ItemType == InventoryItemData.InventoryItemType.Clue) {
+      BuySellUI.BuySellButtonLabel.text = "Read";
+      BuySellUI.SetPanel((int) itemData.ItemCost, canBuySell: true, isClue: true);
+      BuySellUI.BuySellButton.onClick.AddListener(() => Debug.Log("Boo!"));
     } else {
       BuySellUI.HidePanel();
     }

@@ -18,13 +18,4 @@ MonoBehaviour:
   <ItemSprite>k__BackingField: {fileID: 21300000, guid: 8b440f9b56362fa439cf6777ae8e66b7, type: 3}
   <ItemSpriteColor>k__BackingField: {r: 1, g: 0.9316776, b: 0.495283, a: 1}
   <ItemName>k__BackingField: Journal Entry
-  <ItemDescription>k__BackingField: "Date: March 8, 2023\r\nLocation: Caribbean\r\nWeather:
-    Sunny, with a slight breeze\r\nToday was a momentous day. After years of searching,
-    we finally found the map to the pirate cove. It was hidden in a secret compartment
-    in an old book that we found in a dusty library. The map was old and faded, but
-    we were able to make out the details. It showed the location of a small island
-    in the Caribbean. It mentions a great treasure\u2026\r\nWe have been studying
-    pirates for our entire lives, and this is our chance to make a real discovery.
-    We know that the treasure is out there, and we are determined to find it.\r\nWe
-    are leaving tomorrow morning. We are not sure how long it will take us to find
-    the treasure, but we are determined to succeed. "
+  <ItemDescription>k__BackingField: An entry from a weathered jornal.
