@@ -21,7 +21,7 @@ public class MenuUIController : MonoBehaviour {
     _colorGradingEffect = EffectsVolume.profile.GetSetting<ColorGrading>();
     _depthOfFieldEffect = EffectsVolume.profile.GetSetting<DepthOfField>();
 
-    ToggleMenu(toggleOn: false);
+    MenuPanel.SetActive(false);
   }
 
   public void ToggleMenu(bool toggleOn) {
