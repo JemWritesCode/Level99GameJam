@@ -15,7 +15,4 @@ public class OpenTreasureLid : MonoBehaviour
 
         lidMoveSound.Play();
     }
-
-
-
 }
