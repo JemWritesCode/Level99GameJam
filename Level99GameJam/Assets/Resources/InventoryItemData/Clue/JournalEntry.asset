@@ -16,7 +16,7 @@ MonoBehaviour:
   <ItemTag>k__BackingField: JournalEntry
   <ItemCost>k__BackingField: 0
   <ItemSprite>k__BackingField: {fileID: 21300000, guid: 8b440f9b56362fa439cf6777ae8e66b7, type: 3}
-  <ItemSpriteColor>k__BackingField: {r: 0.6670748, g: 1, b: 0, a: 1}
+  <ItemSpriteColor>k__BackingField: {r: 1, g: 0.9316776, b: 0.495283, a: 1}
   <ItemName>k__BackingField: Journal Entry
   <ItemDescription>k__BackingField: "Date: March 8, 2023\r\nLocation: Caribbean\r\nWeather:
     Sunny, with a slight breeze\r\nToday was a momentous day. After years of searching,

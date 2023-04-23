@@ -149,12 +149,8 @@ public class InventoryUIController : MonoBehaviour {
   public GameObject AddPlayerItem(InventoryItemData itemData) {
     GameObject itemSlot = Instantiate(ItemSlotTemplate, ItemListContent);
     ItemSlotUIController itemSlotUI = itemSlot.GetComponent<ItemSlotUIController>();
-
-    itemSlotUI.ItemLabel.text = itemData.ItemName;
-    itemSlotUI.ItemImage.sprite = itemData.ItemSprite;
-    itemSlotUI.ItemImage.color = itemData.ItemSpriteColor;
+    itemSlotUI.SetupItemSlot(itemData);
     itemSlotUI.ItemButton.onClick.AddListener(() => OnPlayerItemClicked(itemSlot, itemData));
-    itemSlotUI.ItemBadge.SetActive(itemData.ItemType == InventoryItemData.InventoryItemType.Equipment);
 
     itemSlot.SetActive(true);
 
@@ -196,10 +192,7 @@ public class InventoryUIController : MonoBehaviour {
   public GameObject AddShopItem(InventoryItemData itemData) {
     GameObject itemSlot = Instantiate(ItemSlotTemplate, ShopItemListContent);
     ItemSlotUIController itemSlotUI = itemSlot.GetComponent<ItemSlotUIController>();
-
-    itemSlotUI.ItemLabel.text = itemData.ItemName;
-    itemSlotUI.ItemImage.sprite = itemData.ItemSprite;
-    itemSlotUI.ItemImage.color = itemData.ItemSpriteColor;
+    itemSlotUI.SetupItemSlot(itemData);
     itemSlotUI.ItemBadge.SetActive(false);
     itemSlotUI.ItemButton.onClick.AddListener(() => OnShopItemClicked(itemSlot, itemData));
 
