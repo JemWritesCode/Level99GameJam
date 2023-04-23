@@ -30,6 +30,11 @@ public class InventoryManager : MonoBehaviour {
     }
   }
 
+    public void addToInventory(InventoryItemData itemToAdd)
+    {
+        PlayerInventory.Add(itemToAdd);
+    }
+
   void Awake() {
     if (!_instance) {
       _instance = this;
