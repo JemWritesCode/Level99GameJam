@@ -51,4 +51,15 @@ public class OxygenUIController : MonoBehaviour {
         .SetLink(OxygenPanel.gameObject)
         .SetTarget(OxygenPanel);
   }
+
+  public void SetOxygenPercent(float percent) {
+    OxygenSlider.DOComplete(withCallbacks: true);
+
+    OxygenSliderHandle.text = percent > OxygenSlider.value ? "<" : ">";
+
+    DOTween.Sequence()
+        .Insert(0f, OxygenSlider.DOValue(percent, 0.5f))
+        .Insert(0f, OxygenSliderHandle.DOFade(1f, 0.25f))
+        .Insert(0.25f, OxygenSliderHandle.DOFade(0f, 0.25f));
+  }
 }

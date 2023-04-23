@@ -3,8 +3,19 @@
 using UnityEngine;
 
 public class OxygenManager : MonoBehaviour {
+  [field: SerializeField, Header("Oxygen")]
+  public float OxygenMaxValue { get; private set; }
 
-  static OxygenManager _instance;
+  [field: SerializeField]
+  public float OxygenCurrentValue { get; private set; }
+
+  [field: SerializeField, Header("Tick")]
+  public float OxygenTickInterval { get; private set; }
+
+  [field: SerializeField]
+  public float OxygenTickValue { get; private set; }
+
+  static OxygenManager _instance = null;
 
   public static OxygenManager Instance {
     get {
@@ -15,7 +26,6 @@ public class OxygenManager : MonoBehaviour {
       if (!_instance) {
         GameObject manager = new("OxygenManager");
         _instance = manager.AddComponent<OxygenManager>();
-        DontDestroyOnLoad(manager);
       }
 
       return _instance;
@@ -25,9 +35,38 @@ public class OxygenManager : MonoBehaviour {
   void Awake() {
     if (!_instance) {
       _instance = this;
-      DontDestroyOnLoad(gameObject);
     } else {
       Destroy(this);
+    }
+  }
+
+  float _timeSinceLastTick = 0f;
+
+  void Update() {
+    if (_isBelowOceanSurface) {
+      _timeSinceLastTick += Time.deltaTime;
+
+      if (_timeSinceLastTick >= OxygenTickInterval) {
+        _timeSinceLastTick = 0f;
+        OxygenCurrentValue -= OxygenTickValue;
+
+        if (_oxygenUI) {
+          _oxygenUI.SetOxygenPercent(OxygenCurrentValue / OxygenMaxValue);
+        }
+      }
+    } else if (OxygenCurrentValue < OxygenMaxValue) {
+      _timeSinceLastTick += Time.deltaTime;
+
+      if (_timeSinceLastTick >= 1f) {
+        _timeSinceLastTick = 0f;
+        OxygenCurrentValue = Mathf.Clamp(OxygenCurrentValue + (OxygenMaxValue * 0.25f), 0f, OxygenMaxValue);
+
+        if (_oxygenUI) {
+          _oxygenUI.SetOxygenPercent(OxygenCurrentValue / OxygenMaxValue);
+        }
+      }
+    } else {
+      _timeSinceLastTick = 0f;
     }
   }
 
@@ -58,7 +97,7 @@ public class OxygenManager : MonoBehaviour {
         continue;
       } else if (_isBelowOceanSurface) {
         _oxygenUI.ShowOxygenPanel();
-      } else {
+      } else if (OxygenCurrentValue >= OxygenMaxValue) {
         _oxygenUI.HideOxygenPanel();
       }
     }
