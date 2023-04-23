@@ -48,7 +48,7 @@ public class OxygenManager : MonoBehaviour {
 
       if (_timeSinceLastTick >= OxygenTickInterval) {
         _timeSinceLastTick = 0f;
-        OxygenCurrentValue -= OxygenTickValue;
+        OxygenCurrentValue = Mathf.Clamp(OxygenCurrentValue - OxygenTickValue, 0f, OxygenMaxValue);
 
         if (_oxygenUI) {
           _oxygenUI.SetOxygenPercent(OxygenCurrentValue / OxygenMaxValue);
