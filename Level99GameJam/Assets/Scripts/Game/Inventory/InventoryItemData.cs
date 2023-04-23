@@ -12,6 +12,9 @@ public class InventoryItemData : ScriptableObject {
   public InventoryItemType ItemType { get; private set; }
 
   [field: SerializeField]
+  public string ItemTag { get; private set; } = string.Empty;
+
+  [field: SerializeField]
   public float ItemCost { get; private set; }
 
   [field: Header("UI")]
