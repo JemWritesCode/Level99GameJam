@@ -15,6 +15,9 @@ public class OxygenManager : MonoBehaviour {
   [field: SerializeField]
   public float OxygenTickValue { get; private set; }
 
+  [field: SerializeField, Header("Recover")]
+  public float OxygenRecoverValue { get; private set; }
+
   static OxygenManager _instance = null;
 
   public static OxygenManager Instance {
@@ -59,7 +62,7 @@ public class OxygenManager : MonoBehaviour {
 
       if (_timeSinceLastTick >= 1f) {
         _timeSinceLastTick = 0f;
-        OxygenCurrentValue = Mathf.Clamp(OxygenCurrentValue + (OxygenMaxValue * 0.25f), 0f, OxygenMaxValue);
+        OxygenCurrentValue = Mathf.Clamp(OxygenCurrentValue + OxygenRecoverValue, 0f, OxygenMaxValue);
 
         if (_oxygenUI) {
           _oxygenUI.SetOxygenPercent(OxygenCurrentValue / OxygenMaxValue);
@@ -88,17 +91,26 @@ public class OxygenManager : MonoBehaviour {
   }
 
   IEnumerator UpdateOxygenUI() {
-    WaitForSeconds waitInterval = new(seconds: 0.5f);
+    float oxygenAtFullTime = 0f;
 
     while (_oxygenUI) {
-      yield return waitInterval;
+      yield return null;
 
       if (_isBelowOceanSurface == _oxygenUI.IsVisible()) {
         continue;
       } else if (_isBelowOceanSurface) {
         _oxygenUI.ShowOxygenPanel();
-      } else if (OxygenCurrentValue >= OxygenMaxValue) {
-        _oxygenUI.HideOxygenPanel();
+        oxygenAtFullTime = 0f;
+      } else if (_oxygenUI.IsVisible()) {
+        if (OxygenCurrentValue < OxygenMaxValue) {
+          oxygenAtFullTime = 0f;
+        } else {
+          oxygenAtFullTime += Time.deltaTime;
+
+          if (oxygenAtFullTime > 3f) {
+            _oxygenUI.HideOxygenPanel();
+          }
+        }
       }
     }
   }
