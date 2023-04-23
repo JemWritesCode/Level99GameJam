@@ -152,6 +152,7 @@ public class InventoryUIController : MonoBehaviour {
 
     itemSlotUI.ItemLabel.text = itemData.ItemName;
     itemSlotUI.ItemImage.sprite = itemData.ItemSprite;
+    itemSlotUI.ItemImage.color = itemData.ItemSpriteColor;
     itemSlotUI.ItemButton.onClick.AddListener(() => OnPlayerItemClicked(itemSlot, itemData));
     itemSlotUI.ItemBadge.SetActive(itemData.ItemType == InventoryItemData.InventoryItemType.Equipment);
 
@@ -198,6 +199,7 @@ public class InventoryUIController : MonoBehaviour {
 
     itemSlotUI.ItemLabel.text = itemData.ItemName;
     itemSlotUI.ItemImage.sprite = itemData.ItemSprite;
+    itemSlotUI.ItemImage.color = itemData.ItemSpriteColor;
     itemSlotUI.ItemBadge.SetActive(false);
     itemSlotUI.ItemButton.onClick.AddListener(() => OnShopItemClicked(itemSlot, itemData));
 
