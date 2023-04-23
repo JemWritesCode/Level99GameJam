@@ -7,6 +7,9 @@ public class InputManager : MonoBehaviour {
   [field: SerializeField]
   public MenuUIController MenuUI { get; private set; }
 
+  [field: SerializeField]
+  public OxygenUIController OxygenUI { get; private set; }
+
   static InputManager _instance;
 
   public static InputManager Instance {

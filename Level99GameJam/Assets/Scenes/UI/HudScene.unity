@@ -499,6 +499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <InventoryUI>k__BackingField: {fileID: 814790968}
   <MenuUI>k__BackingField: {fileID: 480025656}
+  <OxygenUI>k__BackingField: {fileID: 1743370297}
 --- !u!1 &220718087
 GameObject:
   m_ObjectHideFlags: 0
