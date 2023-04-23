@@ -24,6 +24,8 @@ public class MenuUIController : MonoBehaviour {
     MenuPanel.SetActive(false);
   }
 
+  public bool IsVisible { get => MenuPanel.activeSelf; }
+
   public void ToggleMenu(bool toggleOn, bool shouldSkipLockUnlock = false) {
     MenuPanel.SetActive(toggleOn);
 

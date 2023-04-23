@@ -75,6 +75,10 @@ public class InputManager : MonoBehaviour {
   }
 
   public void LockCursor() {
+    if (MenuUI.IsVisible || InventoryUI.IsVisible || CurrentDialogUI) {
+      return;
+    }
+
     PlayerCharacterController.UnpausePlayer();
 
     Cursor.lockState = CursorLockMode.Locked;
