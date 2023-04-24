@@ -223,7 +223,7 @@ public class InventoryUIController : MonoBehaviour {
 
   public void BuyShopItem(GameObject itemSlot, InventoryItemData itemData) {
     InventoryManager.Instance.ShopInventory.Remove(itemData);
-    InventoryManager.Instance.PlayerInventory.Add(itemData);
+    InventoryManager.Instance.AddToInventory(itemData);
     InventoryManager.Instance.PlayerCurrentCoins -= itemData.ItemCost;
     TreasuryUI.SetCoinsValue(Mathf.RoundToInt(InventoryManager.Instance.PlayerCurrentCoins));
 
