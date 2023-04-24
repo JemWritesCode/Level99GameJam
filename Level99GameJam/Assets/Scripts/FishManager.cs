@@ -22,8 +22,6 @@ public class FishManager : MonoBehaviour
             fishPool[i] = newFish;
             Debug.Log("i: " + i);
         }
-   
-        
     }
 
     private GameObject RandomFishPrefab()
