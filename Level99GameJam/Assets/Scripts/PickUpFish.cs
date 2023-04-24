@@ -10,7 +10,7 @@ public class PickUpFish : MonoBehaviour
     {
         // jem todo look into singletons so you don't have to cache in every script every times
 
-        InventoryManager.Instance.addToInventory(fishType);
+        InventoryManager.Instance.AddToInventory(fishType);
         GameObject.Destroy(this.gameObject);
     }
 

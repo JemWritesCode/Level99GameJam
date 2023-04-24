@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using Crest;
 
 public class PlayerEquipment : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    //[field: SerializeField, Header("GogglesEquipped")]
+    //public string KeyItemTag { get; private set; } = "Goggles";
+
+    //public bool hasGogglesEquipped()
+    //{
+    //    return InventoryManager.Instance.PlayerInventory.Any(item => item.ItemTag == KeyItemTag);
+    //}
+
+    // I need to capture the goggles only when they got bought the first time otherwise it's really unperformant
+
+    public void putOnPlayerGoggles()
     {
-        
+        UnderwaterRenderer.Instance._depthFogDensityFactor = .06f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

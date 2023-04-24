@@ -10,7 +10,7 @@ public class PickupItem : MonoBehaviour
 
     public void grabTheItem()
     {
-        InventoryManager.Instance.addToInventory(itemToPickup);
+        InventoryManager.Instance.AddToInventory(itemToPickup);
         GameObject.Destroy(this.gameObject);
         if (pickupSound != null)
         {

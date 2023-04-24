@@ -22,7 +22,7 @@ public class ShowDialog : MonoBehaviour
     {
         if (dialogToPickup != null)
         {
-            InventoryManager.Instance.addToInventory(dialogToPickup);
+            InventoryManager.Instance.AddToInventory(dialogToPickup);
         }
         if (DialogDataToShow) {
           GetDialogUI().OpenDialog(DialogDataToShow);

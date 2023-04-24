@@ -30,9 +30,13 @@ public class InventoryManager : MonoBehaviour {
     }
   }
 
-    public void addToInventory(InventoryItemData itemToAdd)
+    public void AddToInventory(InventoryItemData itemToAdd)
     {
         PlayerInventory.Add(itemToAdd);
+        if(itemToAdd.ItemTag == "Goggles")
+        {
+            GetComponent<PlayerEquipment>().putOnPlayerGoggles();
+        }
     }
 
   void Awake() {

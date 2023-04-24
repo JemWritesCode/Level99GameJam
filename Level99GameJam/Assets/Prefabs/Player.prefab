@@ -503,6 +503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   underWaterSound: {fileID: 233346543555066743}
+  aboveWaterSound: {fileID: 0}
   swimSpeed: 7
   target: {fileID: 7710686024236142324}
 --- !u!1 &6746425803149387221
@@ -607,7 +608,7 @@ MonoBehaviour:
   _mode: 0
   _filterOceanData: 13
   _meniscus: 1
-  _depthFogDensityFactor: 0.086
+  _depthFogDensityFactor: 0.09
   _volumeGeometry: {fileID: 0}
   _invertCulling: 0
   _enableShaderAPI: 0
