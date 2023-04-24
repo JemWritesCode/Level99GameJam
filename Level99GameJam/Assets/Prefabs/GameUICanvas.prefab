@@ -5031,6 +5031,7 @@ MonoBehaviour:
   <BuySellUI>k__BackingField: {fileID: 8485002934623536760}
   <TreasuryUI>k__BackingField: {fileID: 8485002934894043482}
   <DialogUI>k__BackingField: {fileID: 1536979941720587573}
+  <HelpPanel>k__BackingField: {fileID: 8042308114166306865}
 --- !u!1 &8485002935639628087
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,9 +8,6 @@ public class MenuUIController : MonoBehaviour {
   [field: SerializeField, Header("UI")]
   public GameObject MenuPanel { get; private set; }
 
-  [field: SerializeField, Header("Help")]
-  public CanvasGroup HelpPanel { get; private set; }
-
   [field: SerializeField, Header("Buttons")]
   public Button QuitButton { get; private set; }
 
@@ -42,9 +39,6 @@ public class MenuUIController : MonoBehaviour {
               1f)
         .SetUpdate(true)
         .SetEase(Ease.Linear);
-
-    HelpPanel.DOComplete(true);
-    HelpPanel.DOFade(toggleOn ? 1f : 0f, 0.25f);
 
     if (shouldSkipLockUnlock) {
       return;
