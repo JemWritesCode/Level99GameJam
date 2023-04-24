@@ -11,7 +11,7 @@ public class InteractUIController : MonoBehaviour {
 
   public bool IsVisible { get; private set; } = false;
 
-  private void Awake() {
+  private void Start() {
     ResetPanel();
     InteractManager.Instance.SetInteractUI(this);
   }
