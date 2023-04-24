@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System.Linq;
 
 public class TreasuryDoor : MonoBehaviour
 {
@@ -13,8 +14,21 @@ public class TreasuryDoor : MonoBehaviour
     
     [SerializeField] AudioSource doorMoveSound;
 
+    [field: SerializeField, Header("KeyItem")]
+    public string KeyItemTag { get; private set; } = "DaggerKey";
+
+    public bool CanMoveTreasuryDoor() {
+      return
+          string.IsNullOrEmpty(KeyItemTag)
+          || InventoryManager.Instance.PlayerInventory.Any(item => item.ItemTag == KeyItemTag);
+    }
+
     public void moveTreasuryDoor()
     {
+        if (!CanMoveTreasuryDoor()) {
+          return;
+        }
+
         Debug.Log("You interacted with the sword on the Treasury Door!");
 
         shakeAndGoDown();
