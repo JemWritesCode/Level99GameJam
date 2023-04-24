@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 
 using UnityEngine;
 
@@ -17,6 +18,9 @@ public class OxygenManager : MonoBehaviour {
 
   [field: SerializeField, Header("Recover")]
   public float OxygenRecoverValue { get; private set; }
+
+  [field: SerializeField, Header("Events")]
+  public event EventHandler<bool> OxygenEmptyEvent;
 
   static OxygenManager _instance = null;
 
@@ -46,7 +50,7 @@ public class OxygenManager : MonoBehaviour {
   float _timeSinceLastTick = 0f;
 
   void Update() {
-    if (_isBelowOceanSurface) {
+    if (IsBelowOceanSurface) {
       _timeSinceLastTick += Time.deltaTime;
 
       if (_timeSinceLastTick >= OxygenTickInterval) {
@@ -56,6 +60,10 @@ public class OxygenManager : MonoBehaviour {
         if (_oxygenUI) {
           _oxygenUI.SetOxygenPercent(OxygenCurrentValue / OxygenMaxValue);
         }
+      }
+
+      if (OxygenCurrentValue <= 0f && IsBelowOceanSurface) {
+        OxygenEmptyEvent?.Invoke(this, IsBelowOceanSurface);
       }
     } else if (OxygenCurrentValue < OxygenMaxValue) {
       _timeSinceLastTick += Time.deltaTime;
@@ -80,14 +88,14 @@ public class OxygenManager : MonoBehaviour {
     _oxygenUI.StartCoroutine(UpdateOxygenUI());
   }
 
-  bool _isBelowOceanSurface = false;
+  public bool IsBelowOceanSurface { get; private set; } = false;
 
   public void OnBelowOceanSurface() {
-    _isBelowOceanSurface = true;
+    IsBelowOceanSurface = true;
   }
 
   public void OnAboveOceanSurface() {
-    _isBelowOceanSurface = false;
+    IsBelowOceanSurface = false;
   }
 
   IEnumerator UpdateOxygenUI() {
@@ -96,9 +104,9 @@ public class OxygenManager : MonoBehaviour {
     while (_oxygenUI) {
       yield return null;
 
-      if (_isBelowOceanSurface == _oxygenUI.IsVisible()) {
+      if (IsBelowOceanSurface == _oxygenUI.IsVisible()) {
         continue;
-      } else if (_isBelowOceanSurface) {
+      } else if (IsBelowOceanSurface) {
         _oxygenUI.ShowOxygenPanel();
         oxygenAtFullTime = 0f;
       } else if (_oxygenUI.IsVisible()) {
