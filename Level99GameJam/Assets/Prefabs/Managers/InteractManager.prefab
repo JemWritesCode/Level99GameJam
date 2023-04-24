@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5752596926641625989
+--- !u!1 &3805649268645391664
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5752596926641625990}
-  - component: {fileID: 5752596926641625991}
+  - component: {fileID: 3636744419939826424}
+  - component: {fileID: 3318245474886353585}
   m_Layer: 0
-  m_Name: InventoryManager
+  m_Name: InteractManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5752596926641625990
+--- !u!4 &3636744419939826424
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5752596926641625989}
+  m_GameObject: {fileID: 3805649268645391664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 680.6173, y: 350.90274, z: 4.0565095}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5752596926641625991
+--- !u!114 &3318245474886353585
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5752596926641625989}
+  m_GameObject: {fileID: 3805649268645391664}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0ffb33e0ed3a1940b824b1917af226a, type: 3}
+  m_Script: {fileID: 11500000, guid: 917fcde01d2b67747bd5dd619b6ee7fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <PlayerCurrentCoins>k__BackingField: 0
-  <PlayerInventory>k__BackingField:
-  - {fileID: 11400000, guid: db468adc5fc09e54ebb8e7f35c4f6af8, type: 2}
-  <ShopInventory>k__BackingField:
-  - {fileID: 11400000, guid: 99dd115dfa6d9114abe083edbd8e94c7, type: 2}
-  - {fileID: 11400000, guid: 773e90ee85a2f4847a39a9a269a34494, type: 2}
-  - {fileID: 11400000, guid: d26efb74f34caba4a91d2dc189c1f9a8, type: 2}
+  <InteractUIController>k__BackingField: {fileID: 0}
