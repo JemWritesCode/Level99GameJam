@@ -44,12 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0ffb33e0ed3a1940b824b1917af226a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <PlayerCurrentCoins>k__BackingField: 250
+  <PlayerCurrentCoins>k__BackingField: 0
   <PlayerInventory>k__BackingField:
   - {fileID: 11400000, guid: db468adc5fc09e54ebb8e7f35c4f6af8, type: 2}
-  - {fileID: 11400000, guid: 1568e7a88e07f924f88791922dce7834, type: 2}
-  - {fileID: 11400000, guid: 8584dca0d5322d54a84e119ce121a076, type: 2}
-  - {fileID: 11400000, guid: 99dd115dfa6d9114abe083edbd8e94c7, type: 2}
   <ShopInventory>k__BackingField:
   - {fileID: 11400000, guid: 99dd115dfa6d9114abe083edbd8e94c7, type: 2}
   - {fileID: 11400000, guid: 773e90ee85a2f4847a39a9a269a34494, type: 2}
