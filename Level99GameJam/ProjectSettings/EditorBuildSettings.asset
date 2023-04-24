@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/0-Start Screen 1.unity
+    guid: 9644a204b77a0274c85053abb4434d5f
   - enabled: 1
     path: Assets/Scenes/1-CrestTestScene.unity
     guid: e5d6a1585b6c3884ba1822592ac21667
