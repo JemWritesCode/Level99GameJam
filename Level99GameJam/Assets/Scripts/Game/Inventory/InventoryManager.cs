@@ -14,6 +14,8 @@ public class InventoryManager : MonoBehaviour {
 
   static InventoryManager _instance;
 
+    GameObject player;
+
   public static InventoryManager Instance {
     get {
       if (!_instance) {
@@ -35,7 +37,8 @@ public class InventoryManager : MonoBehaviour {
         PlayerInventory.Add(itemToAdd);
         if(itemToAdd.ItemTag == "Goggles")
         {
-            GetComponent<PlayerEquipment>().putOnPlayerGoggles();
+            player = GameObject.FindGameObjectWithTag("Player");
+            player.GetComponent<PlayerEquipment>().putOnPlayerGoggles();
         }
     }
 
