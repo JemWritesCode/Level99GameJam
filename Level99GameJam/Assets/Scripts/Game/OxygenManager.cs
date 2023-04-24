@@ -60,10 +60,10 @@ public class OxygenManager : MonoBehaviour {
         if (_oxygenUI) {
           _oxygenUI.SetOxygenPercent(OxygenCurrentValue / OxygenMaxValue);
         }
-      }
 
-      if (OxygenCurrentValue <= 0f && IsBelowOceanSurface) {
-        OxygenEmptyEvent?.Invoke(this, IsBelowOceanSurface);
+        if (OxygenCurrentValue <= 0f && IsBelowOceanSurface) {
+          OxygenEmptyEvent?.Invoke(this, IsBelowOceanSurface);
+        }
       }
     } else if (OxygenCurrentValue < OxygenMaxValue) {
       _timeSinceLastTick += Time.deltaTime;

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8705857796950734059}
   - component: {fileID: 8705857796950734058}
+  - component: {fileID: 3051449995800462670}
   m_Layer: 0
   m_Name: GameStartEvent
   m_TagString: Untagged
@@ -46,3 +47,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DialogUI>k__BackingField: {fileID: 0}
   <DialogDataToShow>k__BackingField: {fileID: 11400000, guid: 655c74ea83d206741a92d09a5d68c52b, type: 2}
+--- !u!114 &3051449995800462670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8705857796950734052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba5793d6daeb8045b45759473b6e81f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <RestartPosition>k__BackingField: {x: 411.183, y: 184.365, z: 208.662}

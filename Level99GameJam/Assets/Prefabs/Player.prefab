@@ -112,7 +112,6 @@ GameObject:
   - component: {fileID: 233346543555066743}
   - component: {fileID: 233346543555066742}
   - component: {fileID: 233346543555066729}
-  - component: {fileID: 8557842520798789110}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -507,19 +506,6 @@ MonoBehaviour:
   aboveWaterSound: {fileID: 0}
   swimSpeed: 7
   target: {fileID: 7710686024236142324}
---- !u!114 &8557842520798789110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6746425802701321234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cba5793d6daeb8045b45759473b6e81f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <RestartPosition>k__BackingField: {x: 416.11, y: 183.38, z: 209.72}
 --- !u!1 &6746425803149387221
 GameObject:
   m_ObjectHideFlags: 0
