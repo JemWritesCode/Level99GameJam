@@ -8,6 +8,8 @@ public class ShowDialog : MonoBehaviour
     [field: SerializeField]
     public DialogData DialogDataToShow { get; private set; }
 
+    [SerializeField] InventoryItemData dialogToPickup;
+
     private DialogUIController GetDialogUI() {
       if (!DialogUI) {
         DialogUI = FindObjectOfType<DialogUIController>();
@@ -18,6 +20,10 @@ public class ShowDialog : MonoBehaviour
 
     public void showDialog()
     {
+        if (dialogToPickup != null)
+        {
+            InventoryManager.Instance.addToInventory(dialogToPickup);
+        }
         if (DialogDataToShow) {
           GetDialogUI().OpenDialog(DialogDataToShow);
         }
