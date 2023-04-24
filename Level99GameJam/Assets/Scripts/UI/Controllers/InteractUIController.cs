@@ -13,6 +13,7 @@ public class InteractUIController : MonoBehaviour {
 
   private void Awake() {
     ResetPanel();
+    InteractManager.Instance.SetInteractUI(this);
   }
 
   public void ResetPanel() {
@@ -20,6 +21,22 @@ public class InteractUIController : MonoBehaviour {
     InteractPanel.blocksRaycasts = false;
     InteractText.text = "...";
     IsVisible = false;
+  }
+
+  InteractableHoverText _currentInteractable;
+
+  public void SetInteractable(InteractableHoverText interactable) {
+    if (_currentInteractable == interactable) {
+      return;
+    }
+
+    _currentInteractable = interactable;
+
+    if (interactable) {
+      ShowInteractPanel(interactable.HoverText);
+    } else {
+      HideInteractPanel();
+    }
   }
 
   public void ShowInteractPanel(string interactText) {

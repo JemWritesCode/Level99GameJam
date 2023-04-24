@@ -3566,7 +3566,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pirate Store
+  m_text: Shop
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 21803672ded135f428319c0043f50a19, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 1a2d0fe5d09058942acb2354a063888a, type: 2}
@@ -4015,7 +4015,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MenuPanel>k__BackingField: {fileID: 8485002934475643890}
-  <HelpPanel>k__BackingField: {fileID: 8042308114166306865}
   <QuitButton>k__BackingField: {fileID: 8485002935556359993}
   <EffectsVolume>k__BackingField: {fileID: 8485002935109295688}
 --- !u!114 &8485002935109295688
